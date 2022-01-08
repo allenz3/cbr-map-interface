@@ -5,6 +5,9 @@ function init(){
         view: new ol.View({
             center: ol.proj.transform([-120.740135, 47.751076], 'EPSG:4326', 'EPSG:3857'),
             zoom: 7
+            //maxZoom: 6,
+            //minZoom: 2,
+            //rotation: 0.5
             //https://stackoverflow.com/questions/27820784/openlayers-3-center-map
         }),
         layers: [
@@ -12,7 +15,8 @@ function init(){
                 source: new ol.source.OSM()
             })
         ],
-        target: 'js-map'
+        target: 'js-map',
+        keyboardEventTarget: document
     });
 
     const popupContainerElement = document.getElementById('popup-coordinates');
@@ -28,6 +32,25 @@ function init(){
         popup.setPosition(undefined);
         popup.setPosition(clickedCoordinate);
         popupContainerElement.innerHTML = clickedCoordinate;
+    });
+
+    const dragRotateInteraction = new ol.interaction.DragRotate({
+        condition: ol.events.condition.altKeyOnly
+    });
+
+    map.addInteraction(dragRotateInteraction);
+
+    const drawInteraction = new ol.interaction.Draw({
+        type: 'Polygon',
+        freehand: true
+    });
+
+    map.addInteraction(drawInteraction);
+
+    drawInteraction.on('drawend', function(e) {
+        let parser = new ol.format.GeoJSON();
+        let drawnFeatures = parser.writeFeaturesObject([e.feature]);
+        console.log(drawnFeatures.features[0].geometry.coordinates);
     });
 }
 
