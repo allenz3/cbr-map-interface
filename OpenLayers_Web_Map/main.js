@@ -1,6 +1,22 @@
 window.onload = init
 
-function init(){
+function init() {
+    const fullScreenControl = new ol.control.FullScreen();
+    const mousePositionControl = new ol.control.MousePosition();
+    // overview map
+    const overViewMapControl = new ol.control.OverviewMap({
+        collapsed: false,
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+        ]
+    });
+    const scaleLineControl = new ol.control.ScaleLine();
+    const zoomSliderControl = new ol.control.ZoomSlider();
+    const zoomToExtentControl = new ol.control.ZoomToExtent();
+
+    // initialize map
     const map = new ol.Map({
         view: new ol.View({
             center: ol.proj.transform([-120.740135, 47.751076], 'EPSG:4326', 'EPSG:3857'),
@@ -16,15 +32,24 @@ function init(){
             })
         ],
         target: 'js-map',
-        keyboardEventTarget: document
+        keyboardEventTarget: document,
+        controls: ol.control.defaults().extend([
+            fullScreenControl,
+            mousePositionControl,
+            overViewMapControl,
+            scaleLineControl,
+            zoomSliderControl,
+            zoomToExtentControl
+        ])
     });
 
+    // coordinates on click
     const popupContainerElement = document.getElementById('popup-coordinates');
     const popup = new ol.Overlay({
         element: popupContainerElement,
         positioning: 'center-left'
     });
-
+    
     map.addOverlay(popup);
 
     map.on('click', function(e) {
@@ -34,18 +59,20 @@ function init(){
         popupContainerElement.innerHTML = clickedCoordinate;
     });
 
+    // hold alt + left click and drag mouse cursor to rotate
     const dragRotateInteraction = new ol.interaction.DragRotate({
         condition: ol.events.condition.altKeyOnly
     });
 
     map.addInteraction(dragRotateInteraction);
 
+    // draw coordinate polygons
     const drawInteraction = new ol.interaction.Draw({
         type: 'Polygon',
         freehand: true
     });
 
-    map.addInteraction(drawInteraction);
+    //map.addInteraction(drawInteraction);
 
     drawInteraction.on('drawend', function(e) {
         let parser = new ol.format.GeoJSON();
@@ -54,6 +81,7 @@ function init(){
     });
 }
 
+// input csv location data
 getLocation();
 
 async function getLocation() {
