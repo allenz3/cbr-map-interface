@@ -11,9 +11,9 @@ function init() {
             new ol.layer.Tile({
                 source: new ol.source.OSM(),
                 zIndex: 1,
-                visible: false,
-                extent: [-13872002.193052245, 5686505.724526227, -13025867.222039266, 6339232.393199415],
-                opacity: 0.5
+                visible: true
+                //extent: [-13872002.193052245, 5686505.724526227, -13025867.222039266, 6339232.393199415],
+                //opacity: 0.5
             }),
         ],
         target: 'js-map'
@@ -22,13 +22,13 @@ function init() {
     // Layer Group
     const layerGroup = new ol.layer.Group({
         layers: [
-            new ol.layer.Tile({ // OpenStreetMap
+            new ol.layer.Tile({ // OpenStreetMap Humanitarian Layer
                 source: new ol.source.OSM({
                     url: 'https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
                     //https://wiki.openstreetmap.org/wiki/Tile_servers
                 }),
                 zIndex: 0,
-                visible: true
+                visible: false
             }),
             new ol.layer.Tile({ // Bing Maps (key required)
                 source: new ol.source.BingMaps({
@@ -66,7 +66,21 @@ function init() {
         ]
     })
     map.addLayer(layerGroup);
-    
+
+    const NOAAWMSLayer = new ol.layer.Tile ({ // NOAA WMS Layer (not working)
+        source: new ol.source.TileWMS({
+            url: 'https://nowcoast.noaa.gov/arcgis/services/nowcoast/analysis_meteohydro_sfc_qpe_time/MapServer/WMSServer?https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_emulated_imagery_lightningstrikedensity_goes_time/MapServer/WmsServer?',
+            params: {
+                LAYERS: 1,
+                FORMAT: 'image/png',
+                TRANSPARENT: true
+            }
+            //attributions: '<a href=https://nowcoast.noaa.gov/>© NOAA<a/>'
+        }),
+        visible: false
+    })
+    //map.addLayer(NOAAWMSLayer);
+
     map.on('click', function(e) {
         console.log(e.coordinate);
     });
