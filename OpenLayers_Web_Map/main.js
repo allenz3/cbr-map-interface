@@ -15,7 +15,10 @@ function init() {
     const scaleLineControl = new ol.control.ScaleLine();
     const zoomSliderControl = new ol.control.ZoomSlider();
     const zoomToExtentControl = new ol.control.ZoomToExtent();
-
+    const attributionControl = new ol.control.Attribution({
+        collapsible: true
+    });
+    
     // initialize map
     const map = new ol.Map({
         view: new ol.View({
@@ -33,14 +36,15 @@ function init() {
         ],
         target: 'js-map',
         keyboardEventTarget: document,
-        controls: ol.control.defaults().extend([
+        controls: ol.control.defaults({attribution: false}).extend([
             fullScreenControl,
             mousePositionControl,
             overViewMapControl,
             scaleLineControl,
             zoomSliderControl,
-            zoomToExtentControl
-        ])
+            zoomToExtentControl,
+            attributionControl
+        ]),
     });
 
     // coordinates on click

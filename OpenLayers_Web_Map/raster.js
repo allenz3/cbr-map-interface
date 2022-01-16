@@ -19,6 +19,12 @@ function init() {
         target: 'js-map'
     });
 
+    const popupContainerElement = document.getElementById('popup-coordinates');
+    const popup = new ol.Overlay({
+        element: popupContainerElement,
+        positioning: 'center-left'
+    });
+
     // Layer Group
     const layerGroup = new ol.layer.Group({
         layers: [
@@ -40,7 +46,8 @@ function init() {
             }),
             new ol.layer.Tile({ // CartoDB
                 source: new ol.source.XYZ({
-                    url: 'https://{1-4}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{scale}.png'
+                    url: 'https://{1-4}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{scale}.png',
+                    attributions: '© CARTO'
                     //https://github.com/CartoDB/basemap-styles
                 }),
                 visible: false
@@ -51,14 +58,16 @@ function init() {
             }),
             new ol.layer.Tile({ // Stamen
                 source: new ol.source.Stamen({
-                    layer: 'terrain'
+                    layer: 'terrain',
+                    attributions: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
                     //http://maps.stamen.com/#terrain/12/37.7706/-122.3782
                 }),
                 visible: false
             }),
             new ol.layer.Tile ({ // ArcGIS
                 source: new ol.source.TileArcGISRest({
-                    url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer'
+                    url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer',
+                    attributions: '(c) ESRI and its data partners'
                     //https://sampleserver1.arcgisonline.com/ArcGIS/rest/services
                 }),
                 visible: false
@@ -80,6 +89,8 @@ function init() {
         visible: false
     })
     //map.addLayer(NOAAWMSLayer);
+    //NOAAWMSLayer.getSource().setAttributions('<a href=https://nowcoast.noaa.gov/>© NOAA<a/>');
+    //NOAAWMSLayer.set('maxZoom', 5);
 
     map.on('click', function(e) {
         console.log(e.coordinate);
