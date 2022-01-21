@@ -8,10 +8,25 @@
         <link rel="stylesheet" href="./styles.css">
     </head>
     <body>
-        <div id='js-map' class='map'>
-            <p id='popup-coordinates'></p>
+        <div class="grid-container">
+            <div class="grid-1">
+                <div class="sidebar">
+                    <h2>Base Layers</h2>
+                    <input type="radio" name='baseLayerRadioButton' value='OSMStandard' checked>OSM Standard<br>
+                    <input type="radio" name='baseLayerRadioButton' value='OSMHumanitarian'>OSM Humanitarian<br>
+                    <input type="radio" name='baseLayerRadioButton' value='BingMaps'>Bing Maps<br>
+                    <input type="radio" name='baseLayerRadioButton' value='CartoDarkAll'>Carto Dark All<br>
+                    <input type="radio" name='baseLayerRadioButton' value='StamenTerrainWithLabels'>Stamen Terrain With Labels<br>
+                    <input type="radio" name='baseLayerRadioButton' value='StamenTerrain'>Stamen Terrain<br>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div id='js-map' class='map'>
+                    <p id='popup-coordinates'></p>
+                </div>
+            </div>
         </div>
         <script src='./libs/v6.10.0-dist/ol.js'></script> 
-        <script src='./main.js'></script>
+        <script src='./raster.js'></script>
     </body>
 </html>

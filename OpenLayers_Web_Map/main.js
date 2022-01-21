@@ -76,7 +76,7 @@ function init() {
         freehand: true
     });
 
-    //map.addInteraction(drawInteraction);
+    map.addInteraction(drawInteraction);
 
     drawInteraction.on('drawend', function(e) {
         let parser = new ol.format.GeoJSON();
