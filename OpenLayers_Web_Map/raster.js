@@ -101,6 +101,19 @@ function init() {
     })
     map.addLayer(baseLayerGroup);
 
+    // Layer Switcher Logic for BaseLayers
+    const baseLayerElements = document.querySelectorAll('.sidebar > input[type=radio]');
+    for (let baseLayerElement of baseLayerElements) {
+        baseLayerElement.addEventListener('change', function() {
+            let baseLayerElementValue = this.value;
+            baseLayerGroup.getLayers().forEach(function(element, index, array) {
+                let baseLayerName = element.get('title');
+                element.setVisible(baseLayerName === baseLayerElementValue)
+            })
+        })
+    }
+    //https://www.w3schools.com/jsref/met_document_queryselectorall.asp
+
     const NOAAWMSLayer = new ol.layer.Tile ({ // NOAA WMS Layer (not working)
         source: new ol.source.TileWMS({
             url: 'https://nowcoast.noaa.gov/arcgis/services/nowcoast/analysis_meteohydro_sfc_qpe_time/MapServer/WMSServer?https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_emulated_imagery_lightningstrikedensity_goes_time/MapServer/WmsServer?',
