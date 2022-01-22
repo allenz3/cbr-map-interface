@@ -10,6 +10,10 @@ function init() {
         target: 'js-map'
     });
 
+    map.on('click', function(e) {
+        console.log(e.coordinate);
+    });
+
     const popupContainerElement = document.getElementById('popup-coordinates');
     const popup = new ol.Overlay({
         element: popupContainerElement,
@@ -25,7 +29,7 @@ function init() {
         extent: [-13872002.193052245, 5686505.724526227, -13025867.222039266, 6339232.393199415],
         opacity: 0.5,
         title: 'OSMStandard'
-    })
+    });
 
     // OpenStreetMap Humanitarian
     const openStreetMapHumanitarian = new ol.layer.Tile({
@@ -36,7 +40,7 @@ function init() {
         zIndex: 0,
         visible: false,
         title: 'OSMHumanitarian'
-    })
+    });
 
     // Bing Maps (key required)
     const bingMaps = new ol.layer.Tile({
@@ -47,7 +51,7 @@ function init() {
         }),
         visible: false,
         title: 'BingMaps'
-    })
+    });
 
     const cartoDB = new ol.layer.Tile({ // CartoDB
             source: new ol.source.XYZ({
@@ -57,13 +61,8 @@ function init() {
         }),
         visible: false,
         title: 'CartoDarkAll'
-    })
+    });
 
-    const tileDebug = new ol.layer.Tile({ // Tile Debug
-        source: new ol.source.TileDebug(),
-        visible: false
-    })
-      
     const stamenTerrainWithLabels = new ol.layer.Tile({ // Stamen Terrain With Labels
         source: new ol.source.Stamen({
         layer: 'terrain-labels',
@@ -72,7 +71,7 @@ function init() {
         }),
         visible: false,
         title: 'StamenTerrainWithLabels'
-    })
+    });
        
     const stamenTerrain = new ol.layer.Tile({ // Stamen Terrain
         source: new ol.source.Stamen({
@@ -82,23 +81,14 @@ function init() {
         }),
         visible: false,
         title: 'StamenTerrain'
-    })
-    
-    const tileArcGISLayer = new ol.layer.Tile ({ // ArcGIS
-        source: new ol.source.TileArcGISRest({
-        url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer',
-        attributions: '(c) ESRI and its data partners'
-        //https://sampleserver1.arcgisonline.com/ArcGIS/rest/services
-        }),
-        visible: false
-    })
+    });
 
     // Layer Group
     const baseLayerGroup = new ol.layer.Group({
         layers: [
             openStreetMapStandard, openStreetMapHumanitarian, bingMaps, cartoDB, stamenTerrainWithLabels, stamenTerrain
         ]
-    })
+    });
     map.addLayer(baseLayerGroup);
 
     // Layer Switcher Logic for BaseLayers
@@ -113,6 +103,16 @@ function init() {
         })
     }
     //https://www.w3schools.com/jsref/met_document_queryselectorall.asp
+    
+    const tileArcGISLayer = new ol.layer.Tile ({ // ArcGIS
+        source: new ol.source.TileArcGISRest({
+        url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer',
+        attributions: '(c) ESRI and its data partners'
+        //https://sampleserver1.arcgisonline.com/ArcGIS/rest/services
+        }),
+        visible: false,
+        title: 'TileArcGISLayer'
+    });
 
     const NOAAWMSLayer = new ol.layer.Tile ({ // NOAA WMS Layer (not working)
         source: new ol.source.TileWMS({
@@ -124,13 +124,40 @@ function init() {
             }
             //attributions: '<a href=https://nowcoast.noaa.gov/>© NOAA<a/>'
         }),
-        visible: false
-    })
+        visible: false,
+        title: 'NOAAWMSLayer'
+    });
     //map.addLayer(NOAAWMSLayer);
     //NOAAWMSLayer.getSource().setAttributions('<a href=https://nowcoast.noaa.gov/>© NOAA<a/>');
     //NOAAWMSLayer.set('maxZoom', 5);
 
-    map.on('click', function(e) {
-        console.log(e.coordinate);
+    const tileDebugLayer = new ol.layer.Tile({ // Tile Debug
+        source: new ol.source.TileDebug(),
+        visible: false,
+        title: 'TileDebugLayer'
     });
+   
+    // Raster Tile Layer Group
+    const rasterTileLayerGroup = new ol.layer.Group({
+        layers: [
+            tileArcGISLayer, NOAAWMSLayer, tileDebugLayer
+        ]
+    });
+    map.addLayer(rasterTileLayerGroup);
+
+    // Layer Switcher Logic for Raster Tile Layers
+    const tileRasterLayerElements = document.querySelectorAll('.sidebar > input[type=checkbox]');
+    for (let tileRasterLayerElement of tileRasterLayerElements) {
+        tileRasterLayerElement.addEventListener('change', function() {
+            let tileRasterLayerElementValue = this.value;
+            let tileRasterLayer;
+
+            rasterTileLayerGroup.getLayers().forEach(function(element, index, array) {
+                if (tileRasterLayerElementValue === element.get('title')) {
+                    tileRasterLayer = element;
+                }
+            })
+            this.checked ? tileRasterLayer.setVisible(true) : tileRasterLayer.setVisible(false);
+        })
+    }
 }
