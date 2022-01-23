@@ -24,10 +24,9 @@ function init() {
     // OpenStreetMap Standard
     const openStreetMapStandard = new ol.layer.Tile({
         source: new ol.source.OSM(),
-        zIndex: 1,
         visible: true,
-        extent: [-13872002.193052245, 5686505.724526227, -13025867.222039266, 6339232.393199415],
-        opacity: 0.5,
+        //extent: [-13872002.193052245, 5686505.724526227, -13025867.222039266, 6339232.393199415],
+        //opacity: 0.5,
         title: 'OSMStandard'
     });
 
@@ -37,7 +36,6 @@ function init() {
             url: 'https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
             //https://wiki.openstreetmap.org/wiki/Tile_servers
         }),
-        zIndex: 0,
         visible: false,
         title: 'OSMHumanitarian'
     });
@@ -83,7 +81,7 @@ function init() {
         title: 'StamenTerrain'
     });
 
-    // Layer Group
+    // Base Layer Group
     const baseLayerGroup = new ol.layer.Group({
         layers: [
             openStreetMapStandard, openStreetMapHumanitarian, bingMaps, cartoDB, stamenTerrainWithLabels, stamenTerrain
@@ -136,14 +134,26 @@ function init() {
         visible: false,
         title: 'TileDebugLayer'
     });
-   
+    
+    // Static Image OpenStreetMap Humanitarian
+    const openStreetMapFragmentStatic = new ol.layer.Image({
+        source: new ol.source.ImageStatic({
+            url: './data/static_images/OpenLayers_Static_Humanitarian.png',
+            imageExtent: [4991698.9328313675, 5050292.393744084, 10008191.828130603, 10013417.911357462],
+            attributions: '<a href=https://www.openstreetmap.org/copyright/>© OpenStreetMap contributors<a/>'
+        }),
+        visible: false,
+        title: 'openStreetMapFragmentStatic'
+    });
+    map.addLayer(openStreetMapFragmentStatic);
+
     // Raster Tile Layer Group
-    const rasterTileLayerGroup = new ol.layer.Group({
+    const rasterLayerGroup = new ol.layer.Group({
         layers: [
-            tileArcGISLayer, NOAAWMSLayer, tileDebugLayer
+            tileArcGISLayer, NOAAWMSLayer, tileDebugLayer, openStreetMapFragmentStatic
         ]
     });
-    map.addLayer(rasterTileLayerGroup);
+    map.addLayer(rasterLayerGroup);
 
     // Layer Switcher Logic for Raster Tile Layers
     const tileRasterLayerElements = document.querySelectorAll('.sidebar > input[type=checkbox]');
@@ -152,7 +162,7 @@ function init() {
             let tileRasterLayerElementValue = this.value;
             let tileRasterLayer;
 
-            rasterTileLayerGroup.getLayers().forEach(function(element, index, array) {
+            rasterLayerGroup.getLayers().forEach(function(element, index, array) {
                 if (tileRasterLayerElementValue === element.get('title')) {
                     tileRasterLayer = element;
                 }
