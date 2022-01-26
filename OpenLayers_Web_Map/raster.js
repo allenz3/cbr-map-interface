@@ -53,7 +53,7 @@ function init() {
 
     const cartoDB = new ol.layer.Tile({ // CartoDB
             source: new ol.source.XYZ({
-            url: 'https://{1-4}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{scale}.png',
+            url: 'https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{scale}.png',
             attributions: '© CARTO'
             //https://github.com/CartoDB/basemap-styles
         }),
@@ -81,10 +81,30 @@ function init() {
         title: 'StamenTerrain'
     });
 
+    // Base Vector Layers
+    // Vector Tile Layer OpenStreetMap
+    const openStreetMapVectorTile = new ol.layer.VectorTile({
+        source: new ol.source.VectorTile({
+            url: 'https://api.maptiler.com/tiles/v3-openmaptiles/{z}/{x}/{y}.pbf?key=MLL7YM4jGtTtzUiYA4OH',
+            format: new ol.format.MVT(),
+            attributions: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+        }),
+        visible: false,
+        title: 'VectorTileLayerOpenStreetMap'
+    });
+
+    const openStreetMapVectorTileStyles = 'https://api.maptiler.com/maps/623ecbc0-9057-4cc9-bb17-066c8ef24990/style.json?key=MLL7YM4jGtTtzUiYA4OH'
+    fetch(openStreetMapVectorTileStyles).then(function(response) {
+        response.json().then(function(glStyle) {
+            console.log(glStyle);
+            olms.applyStyle(openStreetMapVectorTile, glStyle, 'v3-openmaptiles');
+        });
+    })
+
     // Base Layer Group
     const baseLayerGroup = new ol.layer.Group({
         layers: [
-            openStreetMapStandard, openStreetMapHumanitarian, bingMaps, cartoDB, stamenTerrainWithLabels, stamenTerrain
+            openStreetMapStandard, openStreetMapHumanitarian, bingMaps, cartoDB, stamenTerrainWithLabels, stamenTerrain, openStreetMapVectorTile
         ]
     });
     map.addLayer(baseLayerGroup);
