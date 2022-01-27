@@ -89,7 +89,7 @@ function init() {
 getLocation();
 
 async function getLocation() {
-    const response = await fetch('./locations/CV_SacPAS_Proj_LatLon.csv');
+    const response = await fetch('./data/locations/CV_SacPAS_Proj_LatLon.csv');
     const data = await response.text();
     //console.log(data);
 

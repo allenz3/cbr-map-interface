@@ -165,7 +165,15 @@ function init() {
         visible: false,
         title: 'openStreetMapFragmentStatic'
     });
-    map.addLayer(openStreetMapFragmentStatic);
+
+    const washingtonGeoJSON = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            url: './data/vector_data/map.geojson',
+            format: new ol.format.GeoJSON()
+        }),
+        visible: true
+    })
+    map.addLayer(washingtonGeoJSON);
 
     // Raster Tile Layer Group
     const rasterLayerGroup = new ol.layer.Group({
