@@ -49,7 +49,7 @@ function init() {
         element: popupContainerElement,
         positioning: 'center-left'
     });
-    map.addOverlay(popup);
+    //map.addOverlay(popup);
 
     map.on('click', function(e) {
         console.log(e.coordinate);
@@ -154,7 +154,7 @@ function init() {
     const openStreetMapVectorTileStyles = 'https://api.maptiler.com/maps/623ecbc0-9057-4cc9-bb17-066c8ef24990/style.json?key=MLL7YM4jGtTtzUiYA4OH'
     fetch(openStreetMapVectorTileStyles).then(function(response) {
         response.json().then(function(glStyle) {
-            console.log(glStyle);
+            //console.log(glStyle);
             olms.applyStyle(openStreetMapVectorTile, glStyle, 'v3-openmaptiles');
         });
     })
@@ -257,24 +257,3 @@ function init() {
         })
     }
 }
-
-// input csv location data
-getLocation();
-
-async function getLocation() {
-    const response = await fetch('./data/locations/CV_SacPAS_Proj_LatLon.csv');
-    const data = await response.text();
-    //console.log(data);
-
-    const locations = data.split('\n').slice(1);
-    locations.forEach(location => {
-        const col = location.split(',');
-        const proj = col[0];
-        const name = col[1];
-        const basin = col[2]; 
-        const lat = col[3];
-        const lon = col[4];
-        console.log(proj, name, basin, lat, lon);
-    });
-}
-//https://youtu.be/RfMkdvN-23o
