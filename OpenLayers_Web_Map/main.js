@@ -226,7 +226,7 @@ function init() {
 
     const washingtonGeoJSON = new ol.layer.Vector({
         source: new ol.source.Vector({
-            url: './data/vector_data/map.geojson',
+            url: './data/vector_data/locationGeoJSON.geojson',
             format: new ol.format.GeoJSON()
         }),
         visible: true
