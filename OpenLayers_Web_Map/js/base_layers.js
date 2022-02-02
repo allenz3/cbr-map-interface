@@ -3,8 +3,8 @@
 const openStreetMapStandard = new ol.layer.Tile({
     source: new ol.source.OSM(),
     visible: true,
-    //extent: [-13872002.193052245, 5686505.724526227, -13025867.222039266, 6339232.393199415],
-    //opacity: 0.5,
+    // extent: [-13872002.193052245, 5686505.724526227, -13025867.222039266, 6339232.393199415],
+    // opacity: 0.5,
     title: 'OSMStandard'
 });
 
@@ -12,7 +12,7 @@ const openStreetMapStandard = new ol.layer.Tile({
 const openStreetMapHumanitarian = new ol.layer.Tile({
     source: new ol.source.OSM({
         url: 'https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
-        //https://wiki.openstreetmap.org/wiki/Tile_servers
+        // https://wiki.openstreetmap.org/wiki/Tile_servers
     }),
     visible: false,
     title: 'OSMHumanitarian'
@@ -23,7 +23,7 @@ const bingMaps = new ol.layer.Tile({
     source: new ol.source.BingMaps({
         key: "Ahi7Plxe8amf9CFyGXySP2KXiTJ9ZENIYigIqIUW0rQ5UVJU5JCnzXbat-LsfQ48",
         imagerySet: 'AerialWithLabelsOnDemand'
-        //https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata
+        // https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata
     }),
     visible: false,
     title: 'BingMaps'
@@ -33,7 +33,7 @@ const cartoDB = new ol.layer.Tile({ // CartoDB
         source: new ol.source.XYZ({
         url: 'https://{1-4}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{scale}.png',
         attributions: '© CARTO'
-        //https://github.com/CartoDB/basemap-styles
+        // https://github.com/CartoDB/basemap-styles
     }),
     visible: false,
     title: 'CartoDarkAll'
@@ -43,7 +43,7 @@ const stamenTerrainWithLabels = new ol.layer.Tile({ // Stamen Terrain With Label
     source: new ol.source.Stamen({
     layer: 'terrain-labels',
     attributions: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
-    //http://maps.stamen.com/#terrain/12/37.7706/-122.3782
+    // http://maps.stamen.com/#terrain/12/37.7706/-122.3782
     }),
     visible: false,
     title: 'StamenTerrainWithLabels'
@@ -53,7 +53,7 @@ const stamenTerrain = new ol.layer.Tile({ // Stamen Terrain
     source: new ol.source.Stamen({
     layer: 'terrain',
     attributions: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
-    //http://maps.stamen.com/#terrain/12/37.7706/-122.3782
+    // http://maps.stamen.com/#terrain/12/37.7706/-122.3782
     }),
     visible: false,
     title: 'StamenTerrain'
@@ -74,7 +74,7 @@ const openStreetMapVectorTile = new ol.layer.VectorTile({
 const openStreetMapVectorTileStyles = 'https://api.maptiler.com/maps/623ecbc0-9057-4cc9-bb17-066c8ef24990/style.json?key=MLL7YM4jGtTtzUiYA4OH'
 fetch(openStreetMapVectorTileStyles).then(function(response) {
     response.json().then(function(glStyle) {
-        //console.log(glStyle);
+        // console.log(glStyle);
         olms.applyStyle(openStreetMapVectorTile, glStyle, 'v3-openmaptiles');
     });
 })
@@ -85,5 +85,18 @@ const baseLayerGroup = new ol.layer.Group({
         openStreetMapStandard, openStreetMapHumanitarian, bingMaps, cartoDB, stamenTerrainWithLabels, stamenTerrain, openStreetMapVectorTile
     ]
 });
+
+// Layer Switcher Logic for BaseLayers
+const baseLayerElements = document.querySelectorAll('.sidebar > input[type=radio]');
+for (let baseLayerElement of baseLayerElements) {
+    baseLayerElement.addEventListener('change', function() {
+        let baseLayerElementValue = this.value;
+        baseLayerGroup.getLayers().forEach(function(element, index, array) {
+            let baseLayerName = element.get('title');
+            element.setVisible(baseLayerName === baseLayerElementValue)
+        })
+    })
+}
+// https://www.w3schools.com/jsref/met_document_queryselectorall.asp
 
 export default baseLayerGroup;

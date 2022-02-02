@@ -3,7 +3,7 @@ const tileArcGISLayer = new ol.layer.Tile ({ // ArcGIS
     source: new ol.source.TileArcGISRest({
     url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer',
     attributions: '(c) ESRI and its data partners'
-    //https://sampleserver1.arcgisonline.com/ArcGIS/rest/services
+    // https://sampleserver1.arcgisonline.com/ArcGIS/rest/services
     }),
     visible: false,
     title: 'TileArcGISLayer'
@@ -17,14 +17,14 @@ const NOAAWMSLayer = new ol.layer.Tile ({ // NOAA WMS Layer
             FORMAT: 'image/png',
             TRANSPARENT: true
         }
-        //attributions: '<a href=https://nowcoast.noaa.gov/>© NOAA<a/>'
+        // attributions: '<a href=https://nowcoast.noaa.gov/>© NOAA<a/>'
     }),
     visible: false,
     title: 'NOAAWMSLayer'
 });
-//map.addLayer(NOAAWMSLayer);
-//NOAAWMSLayer.getSource().setAttributions('<a href=https://nowcoast.noaa.gov/>© NOAA<a/>');
-//NOAAWMSLayer.set('maxZoom', 5);
+// map.addLayer(NOAAWMSLayer);
+// NOAAWMSLayer.getSource().setAttributions('<a href=https://nowcoast.noaa.gov/>© NOAA<a/>');
+// NOAAWMSLayer.set('maxZoom', 5);
 
 const tileDebugLayer = new ol.layer.Tile({ // Tile Debug
     source: new ol.source.TileDebug(),
@@ -43,11 +43,27 @@ const openStreetMapFragmentStatic = new ol.layer.Image({
     title: 'openStreetMapFragmentStatic'
 });
 
-// Raster Tile Layer Group
+// Raster Layer Group
 const rasterLayerGroup = new ol.layer.Group({
     layers: [
         tileArcGISLayer, NOAAWMSLayer, tileDebugLayer, openStreetMapFragmentStatic
     ]
 });
+
+// Layer Switcher Logic for Raster Layers
+const tileRasterLayerElements = document.querySelectorAll('.sidebar > input[type=checkbox]');
+for (let tileRasterLayerElement of tileRasterLayerElements) {
+    tileRasterLayerElement.addEventListener('change', function() {
+        let tileRasterLayerElementValue = this.value;
+        let tileRasterLayer;
+
+        rasterLayerGroup.getLayers().forEach(function(element, index, array) {
+            if (tileRasterLayerElementValue === element.get('title')) {
+                tileRasterLayer = element;
+            }
+        })
+        this.checked ? tileRasterLayer.setVisible(true) : tileRasterLayer.setVisible(false);
+    })
+}
 
 export default rasterLayerGroup;

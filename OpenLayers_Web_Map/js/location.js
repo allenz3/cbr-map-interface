@@ -12,4 +12,4 @@ async function getLocation() {
     });
     return locationInfo;
 }
-//https://youtu.be/RfMkdvN-23o
+// https://youtu.be/RfMkdvN-23o
