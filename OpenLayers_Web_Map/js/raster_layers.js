@@ -1,12 +1,36 @@
 // Raster Layers
 const tileArcGISLayer = new ol.layer.Tile ({ // ArcGIS
     source: new ol.source.TileArcGISRest({
-    url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer',
-    attributions: '(c) ESRI and its data partners'
-    // https://sampleserver1.arcgisonline.com/ArcGIS/rest/services
+        url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer',
+        attributions: '(c) ESRI and its data partners'
+        // https://sampleserver1.arcgisonline.com/ArcGIS/rest/services
     }),
     visible: false,
     title: 'TileArcGISLayer'
+});
+
+const tileArcGISLayer2 = new ol.layer.Tile ({ // ArcGIS
+    source: new ol.source.TileArcGISRest({
+        url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSHydroCached/MapServer',
+        //sublayers: [{
+        //    id: 7
+        //}],
+        attributions: '(c) ESRI and its data partners' 
+    }),
+    visible: false,
+    title: 'TileArcGISLayer2'
+});
+
+const tileArcGISLayer3 = new ol.layer.Tile ({ // ArcGIS
+    source: new ol.source.TileArcGISRest({
+        url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/WaterTemplate/LocalGovernmentInfrastructureBasemap/MapServer',
+        sublayers: [{
+            id: 7
+        }],
+        attributions: '(c) ESRI and its data partners' 
+    }),
+    visible: false,
+    title: 'TileArcGISLayer3'
 });
 
 const NOAAWMSLayer = new ol.layer.Tile ({ // NOAA WMS Layer
@@ -46,7 +70,7 @@ const openStreetMapFragmentStatic = new ol.layer.Image({
 // Raster Layer Group
 const rasterLayerGroup = new ol.layer.Group({
     layers: [
-        tileArcGISLayer, NOAAWMSLayer, tileDebugLayer, openStreetMapFragmentStatic
+        tileArcGISLayer, tileArcGISLayer2, tileArcGISLayer3, NOAAWMSLayer, tileDebugLayer, openStreetMapFragmentStatic
     ]
 });
 
@@ -65,5 +89,7 @@ for (let tileRasterLayerElement of tileRasterLayerElements) {
         this.checked ? tileRasterLayer.setVisible(true) : tileRasterLayer.setVisible(false);
     })
 }
+
+console.log(tileArcGISLayer2);
 
 export default rasterLayerGroup;
