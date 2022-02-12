@@ -90,6 +90,4 @@ for (let tileRasterLayerElement of tileRasterLayerElements) {
     })
 }
 
-console.log(tileArcGISLayer2);
-
 export default rasterLayerGroup;
