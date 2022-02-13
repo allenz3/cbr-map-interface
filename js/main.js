@@ -4,6 +4,7 @@ import vectorLayerGroup from './vector_layers.js';
 import controls from './controls.js';
 import interactions from './interactions.js';
 import overlays from './overlays.js';
+import { getLocation } from './locations.js';
 // https://youtu.be/cRHQNNcYf6s
 
 window.onload = init
@@ -37,4 +38,6 @@ function init() {
 
     // Overlays
     map.addOverlay(overlays.popup);
+
+    getLocation();
 }

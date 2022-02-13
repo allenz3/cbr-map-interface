@@ -2,6 +2,9 @@ import csv
 import os
 import json
 
+# This script converts csv data into GeoJSON data so that OpenLayers can use it.
+# This script creates a new JSON file, so it only needs to be run once per CSV file.
+
 os.chdir("./OpenLayers_Web_Map")
 
 with open('./data/csv/CV_SacPAS_Proj_LatLon.csv', 'r') as locations:
