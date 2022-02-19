@@ -8,12 +8,32 @@ async function getLocation() {
         // creates location list in page sidebar
         const newElem = document.createElement("option");
         newElem.innerHTML = col[1] + " (" + col[0] + ")";
+        newElem.className = "location";  
         document.querySelector(".locationsList").appendChild(newElem);
         // returns array of location data
         return {proj: col[0], name: col[1], basin: col[2], lat: col[3], lon: col[4]};
     });
     return locationsInfo;
 }
+
+// add location by clicking on an option in the select box
+const locationsList = document.querySelector(".locationsList");
+locationsList.addEventListener("click", e => {
+    // prevents event listener from selecting the select element
+    if (e.target.tagName === "OPTION") { // can also use e.target.className === "location"
+        const newElem = document.createElement("li");
+        newElem.innerHTML = e.target.innerHTML;
+        newElem.className = "selectedLocations"; 
+        document.querySelector(".selectedLocationsList").appendChild(newElem);
+    }
+});
+
+// remove location by clicking on the list element directly
+const selectedLocationsList = document.querySelector(".selectedLocationsList");
+selectedLocationsList.addEventListener("click", e => {
+    const child = document.querySelector(".selectedLocations");
+    selectedLocationsList.removeChild(child);
+});
 
 export { getLocation };
 // https://youtu.be/RfMkdvN-23o
