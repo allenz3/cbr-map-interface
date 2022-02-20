@@ -1,12 +1,23 @@
-// import {Circle, Fill, Stroke, Style} from '../libs/v6.10.0-dist/ol.js';
+const fillStyle = new ol.style.Fill({
+    color: [245, 49, 5, 1]
+});
 
-// const filled = new Style({
-//   fill: new Fill({
-//     color: 'rgba(255,255,255,0.8)',
-//   })
-// });
+const strokeStyle = new ol.style.Stroke({
+    color: [0, 0, 0, 1],
+    width: 2,
+    // lineCap: 'square',
+    // lineJoin: 'bevel',
+    // lineDash: [3, 3]
+});
 
-// Vector Layers
+const circleStyle = new ol.style.Circle({
+    fill: new ol.style.Fill({
+        color: [255, 255, 255, 1]
+    }),
+    radius: 8,
+    stroke: strokeStyle
+});
+
 const locationGeoJSON = new ol.layer.Vector({
     source: new ol.source.Vector({
         url: './data/json/locationsGeoJSON.geojson',
@@ -14,7 +25,11 @@ const locationGeoJSON = new ol.layer.Vector({
     }),
     visible: true,
     title: 'locationGeoJSON',
-    //style: filled
+    style: new ol.style.Style({
+        fill: fillStyle,
+        stroke: strokeStyle,
+        image: circleStyle
+    })
 });
 
 // Vector Layer Group

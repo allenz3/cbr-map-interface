@@ -15,7 +15,8 @@ function init() {
     const map = new ol.Map({
         view: new ol.View({
             // center: [-13392860.93604214, 6011494.743803331],
-            center: ol.proj.transform([-120.740135, 47.751076], 'EPSG:4326', 'EPSG:3857'),
+            // center: ol.proj.transform([-120.740135, 47.751076], 'EPSG:4326', 'EPSG:3857'),
+            center: ol.proj.transform([-120.740135, 38.751076], 'EPSG:4326', 'EPSG:3857'),
             zoom: 7
             // maxZoom: 6,
             // minZoom: 2,
@@ -30,6 +31,7 @@ function init() {
     // Views
     map.addInteraction(interactions.dragRotateInteraction);
     // map.addInteraction(interactions.drawInteraction);
+    map.addInteraction(interactions.selectInteraction);
 
     // Layers
     map.addLayer(baseLayerGroup);
