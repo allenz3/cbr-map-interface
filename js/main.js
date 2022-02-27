@@ -31,7 +31,9 @@ function init() {
     // Views
     map.addInteraction(interactions.dragRotateInteraction);
     // map.addInteraction(interactions.drawInteraction);
-    map.addInteraction(interactions.selectInteraction);
+    map.on("singleclick", function(e) {
+        map.forEachFeatureAtPixel(e.pixel, interactions.selectPoints);
+    });
 
     // Layers
     map.addLayer(baseLayerGroup);
