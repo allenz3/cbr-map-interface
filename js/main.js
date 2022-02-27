@@ -4,7 +4,7 @@ import vectorLayerGroup from './vector_layers.js';
 import controls from './controls.js';
 import interactions from './interactions.js';
 import overlays from './overlays.js';
-import { getLocation } from './locations.js';
+import location from './locations.js';
 // https://youtu.be/cRHQNNcYf6s
 
 window.onload = init
@@ -23,7 +23,7 @@ function init() {
             // maxZoom: 6,
             // minZoom: 2,
             // rotation: 0.5
-            // https://stackoverflow.com/questions/27820784/openlayers-3-center-map
+            // https://stackoverflow.com/quiestions/27820784/openlayers-3-center-map
         }),
         target: 'js-map',
         keyboardEventTarget: document,
@@ -33,8 +33,18 @@ function init() {
     // Views
     map.addInteraction(interactions.dragRotateInteraction);
     // map.addInteraction(interactions.drawInteraction);
-    map.on("singleclick", function(e) {
-        map.forEachFeatureAtPixel(e.pixel, interactions.selectPoints);
+    map.on("singleclick", point => {
+        map.forEachFeatureAtPixel(point.pixel, point => {
+            const locationString = point.A.name + " (" + point.A.proj + ")";
+            if (point.getGeometry().getType() === 'Point') {
+                if (!selectedLocationsSet.has(locationString)) { // selected point is unselected
+                    interactions.addPoint(point, locationString);        
+                } else { // unselected point is selected
+                    interactions.removePoint(point, locationString);
+                }
+            }
+            console.log(selectedLocationsSet);
+        });
     });
 
     // Layers
@@ -45,7 +55,7 @@ function init() {
     // Overlays
     map.addOverlay(overlays.popup);
 
-    getLocation();
+    location.getLocation();
 }
 
 export { selectedLocationsSet };

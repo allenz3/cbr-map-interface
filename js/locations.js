@@ -20,28 +20,32 @@ async function getLocation() {
 
 // add location by clicking on an option in the select box
 const locationsList = document.querySelector(".locationsList");
-locationsList.addEventListener("click", e => {
+locationsList.addEventListener("click", location => addLocation(location));
+
+function addLocation(location) {
     // prevents event listener from selecting the select element
-    if (e.target.tagName === "OPTION" && !selectedLocationsSet.has(e.target.innerHTML)) { // can also use e.target.className === "location"
-        selectedLocationsSet.add(e.target.innerHTML);
+    if (location.target.tagName === "OPTION" && !selectedLocationsSet.has(location.target.innerHTML)) { // can also use e.target.className === "location"
+        selectedLocationsSet.add(location.target.innerHTML);
         console.log(selectedLocationsSet);
         const newElem = document.createElement("li");
-        newElem.innerHTML = e.target.innerHTML;
+        newElem.innerHTML = location.target.innerHTML;
         newElem.className = "selectedLocations"; 
         document.querySelector(".selectedLocationsList").appendChild(newElem);
     }
-});
+}
 
 // remove location by clicking on the list element directly
 const selectedLocationsList = document.querySelector(".selectedLocationsList");
-selectedLocationsList.addEventListener("click", e => {
-    selectedLocationsSet.delete(e.target.innerHTML);
-    console.log(selectedLocationsSet);
-    const child = e.target;
-    selectedLocationsList.removeChild(child);
-});
+selectedLocationsList.addEventListener("click", html => removeLocation(html)); 
 
-export { getLocation };
+function removeLocation(html) {
+    selectedLocationsSet.delete(html.target.innerHTML);
+    console.log(selectedLocationsSet);
+    const child = html.target;
+    selectedLocationsList.removeChild(child);
+}
+
+export default { getLocation, addLocation, removeLocation };
 // https://youtu.be/RfMkdvN-23o
 // https://code-boxx.com/add-html-code-in-javascript/#:~:text=WAYS%20TO%20ADD%20HTML%20CODE%201%20METHOD%201%29,TAKE%20EXTRA%20NOTE%20OF%20THE%20LOADING%20ORDER%21%20
 // https://dev.to/ramonak/javascript-how-to-access-the-return-value-of-a-promise-object-1bck

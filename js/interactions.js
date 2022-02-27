@@ -18,45 +18,41 @@ drawInteraction.on('drawend', function(e) {
     console.log(drawnFeatures.features[0].geometry.coordinates);
 });
 
-const selectPoints = function(curr) {
-    const locationString = curr.A.name + " (" + curr.A.proj + ")";
-    if (curr.getGeometry().getType() === 'Point') {
-        if (selectedLocationsSet.has(locationString)) { // selected point is unselected
-            selectedLocationsSet.delete(locationString);
-            curr.setStyle(
-                new ol.style.Style({
-                    image: new ol.style.Circle({
-                        fill: new ol.style.Fill({
-                            color: [255, 255, 255, 1]
-                        }),
-                        radius: 8,
-                        stroke: new ol.style.Stroke({
-                            color: [0, 0, 0, 1],
-                            width: 2
-                        })
-                    })
+function addPoint(point, locationString) {
+    selectedLocationsSet.add(locationString); 
+    point.setStyle(
+        new ol.style.Style({
+            image: new ol.style.Circle({
+                fill: new ol.style.Fill({
+                    color: [0, 153, 255, 1]
+                }),
+                radius: 8,
+                stroke: new ol.style.Stroke({
+                    color: [0, 0, 0, 1],
+                    width: 2
                 })
-            )
-        } else { // unselected point is selected
-            selectedLocationsSet.add(locationString); 
-            curr.setStyle(
-                new ol.style.Style({
-                    image: new ol.style.Circle({
-                        fill: new ol.style.Fill({
-                            color: [0, 153, 255, 1]
-                        }),
-                        radius: 8,
-                        stroke: new ol.style.Stroke({
-                            color: [0, 0, 0, 1],
-                            width: 2
-                        })
-                    })
-                })
-            )
-        }
-    }
-    console.log(selectedLocationsSet);
+            })
+        })
+    )
 }
 
-export default { dragRotateInteraction, drawInteraction, selectPoints };
+function removePoint(point, locationString) {
+    selectedLocationsSet.delete(locationString);
+    point.setStyle(
+        new ol.style.Style({
+            image: new ol.style.Circle({
+                fill: new ol.style.Fill({
+                    color: [255, 255, 255, 1]
+                }),
+                radius: 8,
+                stroke: new ol.style.Stroke({
+                    color: [0, 0, 0, 1],
+                    width: 2
+                })
+            })
+        })
+    )   
+}
+
+export default { dragRotateInteraction, drawInteraction, addPoint, removePoint };
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export
