@@ -9,6 +9,8 @@ import { getLocation } from './locations.js';
 
 window.onload = init
 
+const selectedLocationsSet = new Set();
+
 function init() {
     
     // initialize map
@@ -45,3 +47,5 @@ function init() {
 
     getLocation();
 }
+
+export { selectedLocationsSet };

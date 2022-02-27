@@ -3,52 +3,112 @@
   "features": [
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "AHZ",
+        "name": "AMERICAN R AT HAZEL AVE BRIDGE",
+        "basin": "AMERICAN R",
+        "lat": "38.636",
+        "lon": "-121.224"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.224", "38.636"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "AFD",
+        "name": "AMERICAN R BELOW FOLSOM DAM",
+        "basin": "AMERICAN R",
+        "lat": "38.6883",
+        "lon": "-121.1667"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.1667", "38.6883"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "AFO",
+        "name": "AMERICAN RIVER AT FAIR OAKS",
+        "basin": "AMERICAN R",
+        "lat": "38.63546",
+        "lon": "-121.22773"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.22773", "38.63546"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "AWP",
+        "name": "AMERICAN RIVER AT WILLIAM B POND PARK",
+        "basin": "AMERICAN R",
+        "lat": "38.591",
+        "lon": "-121.332"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.332", "38.591"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "AWB",
+        "name": "AMERICAN RIVER BELOW WATT AVE BRIDGE",
+        "basin": "AMERICAN R",
+        "lat": "38.567",
+        "lon": "-121.387"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.387", "38.567"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "CSU",
+        "name": "CALIFORNIA STATE UNIV AT SACRAMENTO",
+        "basin": "AMERICAN R",
+        "lat": "38.555",
+        "lon": "-121.416"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.416", "38.555"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "FOL",
+        "name": "FOLSOM LAKE",
+        "basin": "AMERICAN R",
+        "lat": "38.683",
+        "lon": "-121.183"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.183", "38.683"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "NAT",
+        "name": "LAKE NATOMA  (NIMBUS DAM)",
+        "basin": "AMERICAN R",
+        "lat": "38.65",
+        "lon": "-121.183"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.183", "38.65"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "BKS",
+        "name": "BARKER SLOUGH PUMPING PLANT (KG000000)",
+        "basin": "DELTA",
+        "lat": "38.2759",
+        "lon": "-121.7965"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.7965", "38.2759"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "BET",
+        "name": "BETHEL ISLAND",
+        "basin": "DELTA",
+        "lat": "38.041092",
+        "lon": "-121.632187"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.632187", "38.041092"]
@@ -56,37 +116,79 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "BBI",
+        "name": "BYRON BETHANY IRRIGATION DIST DIVERSION",
+        "basin": "DELTA",
+        "lat": "37.8298",
+        "lon": "-121.5574"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.5574", "37.8298"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "CCW",
+        "name": "CCWD MIDDLE RIVER PP ON VICTORIA CANAL",
+        "basin": "DELTA",
+        "lat": "37.86654",
+        "lon": "-121.54379"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.54379", "37.86654"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "IDB",
+        "name": "CCWD OLD RIVER PP NEAR DISCOVERY BAY",
+        "basin": "DELTA",
+        "lat": "37.8833",
+        "lon": "-121.577"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.577", "37.8833"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "INB",
+        "name": "CCWD ROCK SLOUGH PP NEAR BRENTWOOD",
+        "basin": "DELTA",
+        "lat": "37.996",
+        "lon": "-121.702"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.702", "37.996"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "CLC",
+        "name": "CLIFTON COURT",
+        "basin": "DELTA",
+        "lat": "37.8298",
+        "lon": "-121.5574"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.5574", "37.8298"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "DTO",
+        "name": "DELTA OUTFLOW",
+        "basin": "DELTA",
+        "lat": "38.059",
+        "lon": "-122.025"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.025", "38.059"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "EMM",
+        "name": "EMMATON (USBR)",
+        "basin": "DELTA",
+        "lat": "38.084272",
+        "lon": "-121.738924"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.738924", "38.084272"]
@@ -94,22 +196,46 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "HRO",
+        "name": "HARVEY O BANKS PUMPING PLANT",
+        "basin": "DELTA",
+        "lat": "37.798",
+        "lon": "-121.623"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.623", "37.798"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "MDM",
+        "name": "MIDDLE RIVER AT MIDDLE RIVER",
+        "basin": "DELTA",
+        "lat": "37.943",
+        "lon": "-121.534"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.534", "37.943"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "OMR",
+        "name": "OLD & MIDDLE RVRS TIDALLY FILTERED EST",
+        "basin": "DELTA",
+        "lat": "37.97",
+        "lon": "-121.5711"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.5711", "37.97"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "OBI",
+        "name": "OLD RIVER AT BACON ISLAND (USGS)",
+        "basin": "DELTA",
+        "lat": "37.969368",
+        "lon": "-121.57222"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.57222", "37.969368"]
@@ -117,12 +243,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "OSJ",
+        "name": "OLD RIVER AT FRANKS TRACT NEAR TERMINOUS",
+        "basin": "DELTA",
+        "lat": "38.0711",
+        "lon": "-121.5789"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.5789", "38.0711"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "OH4",
+        "name": "OLD RIVER AT HIGHWAY 4",
+        "basin": "DELTA",
+        "lat": "37.891109",
+        "lon": "-121.569168"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.569168", "37.891109"]
@@ -130,7 +268,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "OLD",
+        "name": "OLD RIVER NEAR TRACY",
+        "basin": "DELTA",
+        "lat": "37.80481",
+        "lon": "-121.449562"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.449562", "37.80481"]
@@ -138,22 +282,46 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "PPT",
+        "name": "PRISONERS POINT",
+        "basin": "DELTA",
+        "lat": "38.066",
+        "lon": "-121.562"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.562", "38.066"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "VCU",
+        "name": "VICTORIA CANAL NEAR BYRON",
+        "basin": "DELTA",
+        "lat": "37.8717",
+        "lon": "-121.5283"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.5283", "37.8717"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "FRA",
+        "name": "FEATHER RIVER AT MILE 61.6",
+        "basin": "FEATHER R",
+        "lat": "39.468",
+        "lon": "-121.597"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.597", "39.468"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "GRL",
+        "name": "FEATHER RIVER NEAR GRIDLEY",
+        "basin": "FEATHER R",
+        "lat": "39.366577",
+        "lon": "-121.647369"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.647369", "39.366577"]
@@ -161,12 +329,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "ORO",
+        "name": "OROVILLE DAM",
+        "basin": "FEATHER R",
+        "lat": "39.54",
+        "lon": "-121.493"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.493", "39.54"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "BAT",
+        "name": "BATTLE CREEK",
+        "basin": "SACRAMENTO R",
+        "lat": "40.398209",
+        "lon": "-122.146385"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.146385", "40.398209"]
@@ -174,7 +354,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "IGO",
+        "name": "CLEAR CREEK NEAR IGO",
+        "basin": "SACRAMENTO R",
+        "lat": "40.513206",
+        "lon": "-122.524178"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.524178", "40.513206"]
@@ -182,7 +368,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "DCV",
+        "name": "DEER CREEK NR VINA",
+        "basin": "SACRAMENTO R",
+        "lat": "40.014046",
+        "lon": "-121.948318"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.948318", "40.014046"]
@@ -190,17 +382,35 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "DLC",
+        "name": "DELTA CROSS CHANNEL BTW SAC R & SNODGRAS",
+        "basin": "SACRAMENTO R",
+        "lat": "38.245",
+        "lon": "-121.505"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.505", "38.245"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "GSS",
+        "name": "GEORGIANA SLOUGH AT SACRAMENTO RIVER",
+        "basin": "SACRAMENTO R",
+        "lat": "38.237",
+        "lon": "-121.518"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.518", "38.237"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "KES",
+        "name": "KESWICK RESERVOIR",
+        "basin": "SACRAMENTO R",
+        "lat": "40.612104",
+        "lon": "-122.445699"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.445699", "40.612104"]
@@ -208,7 +418,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "MLM",
+        "name": "MILL CREEK NR LOS MOLINOS",
+        "basin": "SACRAMENTO R",
+        "lat": "40.054604",
+        "lon": "-122.024155"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.024155", "40.054604"]
@@ -216,7 +432,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "BNF",
+        "name": "NORTH FORK BATTLE CREEK NEAR MANTON",
+        "basin": "SACRAMENTO R",
+        "lat": "40.424332",
+        "lon": "-121.986946"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.986946", "40.424332"]
@@ -224,12 +446,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SDC",
+        "name": "SACRAMENTO R ABOVE DELTA CROSS CHANNEL",
+        "basin": "SACRAMENTO R",
+        "lat": "38.257",
+        "lon": "-121.518"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.518", "38.257"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "HMC",
+        "name": "SACRAMENTO R AT HAMILTON CITY-MAIN CH",
+        "basin": "SACRAMENTO R",
+        "lat": "39.750923",
+        "lon": "-121.997879"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.997879", "39.750923"]
@@ -237,7 +471,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "ORD",
+        "name": "SACRAMENTO R AT ORD FERRY-MAIN CHANNEL",
+        "basin": "SACRAMENTO R",
+        "lat": "39.628132",
+        "lon": "-121.993179"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.993179", "39.628132"]
@@ -245,7 +485,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "RDB",
+        "name": "SACRAMENTO R AT RED BLUFF DIVERSION DAM",
+        "basin": "SACRAMENTO R",
+        "lat": "40.154362",
+        "lon": "-122.20195"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.20195", "40.154362"]
@@ -253,7 +499,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "FRE",
+        "name": "SACRAMENTO R @ FREMONT WEIR(CREST 32.0')",
+        "basin": "SACRAMENTO R",
+        "lat": "38.759258",
+        "lon": "-121.667274"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.667274", "38.759258"]
@@ -261,12 +513,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "CCR",
+        "name": "SACRAMENTO RIVER ABOVE CLEAR CK",
+        "basin": "SACRAMENTO R",
+        "lat": "40.538",
+        "lon": "-122.356"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.356", "40.538"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "AND",
+        "name": "SACRAMENTO RIVER AT ANDERSON",
+        "basin": "SACRAMENTO R",
+        "lat": "40.471333",
+        "lon": "-122.29536"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.29536", "40.471333"]
@@ -274,12 +538,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "BSF",
+        "name": "SACRAMENTO RIVER AT BALLS FERRY BRIDGE",
+        "basin": "SACRAMENTO R",
+        "lat": "40.417",
+        "lon": "-122.193"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.193", "40.417"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "BND",
+        "name": "SACRAMENTO RIVER AT BEND BRIDGE",
+        "basin": "SACRAMENTO R",
+        "lat": "40.288486",
+        "lon": "-122.186661"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.186661", "40.288486"]
@@ -287,7 +563,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "BTC",
+        "name": "SACRAMENTO RIVER AT BUTTE CITY",
+        "basin": "SACRAMENTO R",
+        "lat": "39.45784",
+        "lon": "-121.994164"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.994164", "39.45784"]
@@ -295,7 +577,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "COL",
+        "name": "SACRAMENTO RIVER AT COLUSA",
+        "basin": "SACRAMENTO R",
+        "lat": "39.214058",
+        "lon": "-122.000252"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.000252", "39.214058"]
@@ -303,12 +591,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "FPT",
+        "name": "SACRAMENTO RIVER AT FREEPORT",
+        "basin": "SACRAMENTO R",
+        "lat": "38.45",
+        "lon": "-121.5"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.5", "38.45"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SRH",
+        "name": "SACRAMENTO RIVER AT HOOD",
+        "basin": "SACRAMENTO R",
+        "lat": "38.367981",
+        "lon": "-121.519958"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.519958", "38.367981"]
@@ -316,12 +616,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "JLF",
+        "name": "SACRAMENTO RIVER AT JELLYS FERRY",
+        "basin": "SACRAMENTO R",
+        "lat": "40.3172",
+        "lon": "-122.1897"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.1897", "40.3172"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "KWK",
+        "name": "SACRAMENTO RIVER AT KESWICK",
+        "basin": "SACRAMENTO R",
+        "lat": "40.600983",
+        "lon": "-122.444458"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.444458", "40.600983"]
@@ -329,7 +641,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "MAL",
+        "name": "SACRAMENTO RIVER AT MALLARD ISLAND",
+        "basin": "SACRAMENTO R",
+        "lat": "38.042805",
+        "lon": "-121.92009"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.92009", "38.042805"]
@@ -337,7 +655,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "RVB",
+        "name": "SACRAMENTO RIVER AT RIO VISTA BRIDGE",
+        "basin": "SACRAMENTO R",
+        "lat": "38.159737",
+        "lon": "-121.686355"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.686355", "38.159737"]
@@ -345,7 +669,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "VON",
+        "name": "SACRAMENTO RIVER AT VERONA",
+        "basin": "SACRAMENTO R",
+        "lat": "38.774155",
+        "lon": "-121.598068"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.598068", "38.774155"]
@@ -353,7 +683,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "VIN",
+        "name": "SACRAMENTO RIVER AT VINA BRIDGE-MAIN CH",
+        "basin": "SACRAMENTO R",
+        "lat": "39.908737",
+        "lon": "-122.092468"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.092468", "39.908737"]
@@ -361,12 +697,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "GES",
+        "name": "SACRAMENTO RIVER BELOW GEORGIANA SLOUGH",
+        "basin": "SACRAMENTO R",
+        "lat": "38.2389",
+        "lon": "-121.5234"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.5234", "38.2389"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "WLK",
+        "name": "SACRAMENTO RIVER BELOW WILKINS SLOUGH",
+        "basin": "SACRAMENTO R",
+        "lat": "39.009895",
+        "lon": "-121.824692"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.824692", "39.009895"]
@@ -374,12 +722,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SAC",
+        "name": "SACRAMENTO RIVER UPSTREAM OF HWY 44",
+        "basin": "SACRAMENTO R",
+        "lat": "40.59258",
+        "lon": "-122.36983"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.36983", "40.59258"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "CLW",
+        "name": "SACTO R AT COLUSA WEIR (CREST 60.9')",
+        "basin": "SACRAMENTO R",
+        "lat": "39.23682",
+        "lon": "-121.994759"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.994759", "39.23682"]
@@ -387,7 +747,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "MLW",
+        "name": "SACTO R AT MOULTON WEIR (CREST 76.2')",
+        "basin": "SACRAMENTO R",
+        "lat": "39.338211",
+        "lon": "-122.022629"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.022629", "39.338211"]
@@ -395,7 +761,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "TIS",
+        "name": "SACTO R AT TISDALE WEIR (CREST 44.1')",
+        "basin": "SACRAMENTO R",
+        "lat": "39.02644",
+        "lon": "-121.822083"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.822083", "39.02644"]
@@ -403,52 +775,112 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SHA",
+        "name": "SHASTA DAM  (USBR)",
+        "basin": "SACRAMENTO R",
+        "lat": "40.718",
+        "lon": "-122.42"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.42", "40.718"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SHD",
+        "name": "SHASTA DAM (WATER QUALITY)",
+        "basin": "SACRAMENTO R",
+        "lat": "40.7161",
+        "lon": "-122.4253"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.4253", "40.7161"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SP1",
+        "name": "SHASTA PENSTOCK #1",
+        "basin": "SACRAMENTO R",
+        "lat": "40.718",
+        "lon": "-122.424"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.424", "40.718"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SP2",
+        "name": "SHASTA PENSTOCK #2",
+        "basin": "SACRAMENTO R",
+        "lat": "40.718",
+        "lon": "-122.424"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.424", "40.718"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SP3",
+        "name": "SHASTA PENSTOCK #3",
+        "basin": "SACRAMENTO R",
+        "lat": "40.718",
+        "lon": "-122.424"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.424", "40.718"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SP4",
+        "name": "SHASTA PENSTOCK #4",
+        "basin": "SACRAMENTO R",
+        "lat": "40.718",
+        "lon": "-122.424"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.424", "40.718"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SP5",
+        "name": "SHASTA PENSTOCK #5",
+        "basin": "SACRAMENTO R",
+        "lat": "40.718",
+        "lon": "-122.424"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.424", "40.718"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "WHI",
+        "name": "WHISKEYTOWN DAM (USBR)",
+        "basin": "SACRAMENTO R",
+        "lat": "40.598",
+        "lon": "-122.537"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.537", "40.598"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "BSD",
+        "name": "BEAR CK BLW EASTSIDE CANAL",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.2547",
+        "lon": "-120.7194"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.7194", "37.2547"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "DM3",
+        "name": "CHECK 21",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.780899",
+        "lon": "-120.372473"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-120.372473", "36.780899"]
@@ -456,12 +888,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "CBP",
+        "name": "CHOWCHILLA BYPASS",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.774",
+        "lon": "-120.285"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.285", "36.774"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "CTK",
+        "name": "COTTONWOOD CREEK NEAR FRIANT",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.001231",
+        "lon": "-119.719441"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-119.719441", "37.001231"]
@@ -469,32 +913,68 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "EBM",
+        "name": "EASTSIDE BYPASS BLW MARIPOSA BYPASS",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.205",
+        "lon": "-120.6981"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.6981", "37.205"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "ELN",
+        "name": "EASTSIDE BYPASS NEAR EL NIDO",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.1475",
+        "lon": "-120.6053"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.6053", "37.1475"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "MIL",
+        "name": "FRIANT DAM (MILLERTON)",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.001",
+        "lon": "-119.705"
+      },
       "geometry": { "type": "Point", "coordinates": ["-119.705", "37.001"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "HOL",
+        "name": "HOLLAND CUT NEAR BETHEL ISLAND",
+        "basin": "SAN JOAQUIN R",
+        "lat": "38.0164",
+        "lon": "-121.5819"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.5819", "38.0164"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "JBP",
+        "name": "JAMES BYPASS",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.653",
+        "lon": "-120.18"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.18", "36.653"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "LDC",
+        "name": "LITTLE DRY CREEK (USBR)",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.934193",
+        "lon": "-119.729557"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-119.729557", "36.934193"]
@@ -502,22 +982,46 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "MSG",
+        "name": "MUD SLOUGH NR GUSTINE",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.2625",
+        "lon": "-120.9056"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.9056", "37.2625"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "ORI",
+        "name": "OLD RIVER AT CLIFTON COURT INTAKE",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.828",
+        "lon": "-121.5526"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.5526", "37.828"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SSH",
+        "name": "SALT SLOUGH AT HWY 165 NR STEVINSON",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.2478",
+        "lon": "-120.8511"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.8511", "37.2478"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SMN",
+        "name": "SAN JOAQUIN R ABV MERCED R NR NEWMAN",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.347214",
+        "lon": "-120.976181"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-120.976181", "37.347214"]
@@ -525,17 +1029,35 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "BDT",
+        "name": "SAN JOAQUIN R AT BRANDT BRIDGE",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.865",
+        "lon": "-121.3231"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.3231", "37.865"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "DNB",
+        "name": "SAN JOAQUIN R AT DONNY BRIDGE",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.8335",
+        "lon": "-119.9658"
+      },
       "geometry": { "type": "Point", "coordinates": ["-119.9658", "36.8335"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "FFB",
+        "name": "SAN JOAQUIN R AT FREMONT FORD BRIDGE",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.30994",
+        "lon": "-120.931038"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-120.931038", "37.30994"]
@@ -543,22 +1065,46 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "FWQ",
+        "name": "SAN JOAQUIN R AT FRIANT DAM-WQ",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.9993",
+        "lon": "-119.7061"
+      },
       "geometry": { "type": "Point", "coordinates": ["-119.7061", "36.9993"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "H41",
+        "name": "SAN JOAQUIN R AT HWY 41",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.8762",
+        "lon": "-119.7932"
+      },
       "geometry": { "type": "Point", "coordinates": ["-119.7932", "36.8762"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "PRI",
+        "name": "SAN JOAQUIN R AT PRISONERS PT NR TERMINO",
+        "basin": "SAN JOAQUIN R",
+        "lat": "38.0594",
+        "lon": "-121.5572"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.5572", "38.0594"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SJN",
+        "name": "SAN JOAQUIN R AT SAN MATEO RD NR MENDOTA",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.778889",
+        "lon": "-120.306664"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-120.306664", "36.778889"]
@@ -566,7 +1112,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "ANH",
+        "name": "SAN JOAQUIN RIVER AT ANTIOCH",
+        "basin": "SAN JOAQUIN R",
+        "lat": "38.01783",
+        "lon": "-121.802963"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.802963", "38.01783"]
@@ -574,27 +1126,57 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "GRF",
+        "name": "SAN JOAQUIN RIVER AT GRAVELLY FORD",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.798",
+        "lon": "-120.16"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.16", "36.798"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SJJ",
+        "name": "SAN JOAQUIN RIVER AT JERSEY POINT (USGS)",
+        "basin": "SAN JOAQUIN R",
+        "lat": "38.052",
+        "lon": "-121.689"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.689", "38.052"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "MSD",
+        "name": "SAN JOAQUIN RIVER AT MOSSDALE BRIDGE",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.786",
+        "lon": "-121.306"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.306", "37.786"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SJB",
+        "name": "SAN JOAQUIN RIVER BELOW BIFURCATION",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.773",
+        "lon": "-120.286"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.286", "36.773"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SJF",
+        "name": "SAN JOAQUIN RIVER BELOW FRIANT",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.984394",
+        "lon": "-119.724312"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-119.724312", "36.984394"]
@@ -602,7 +1184,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "MEN",
+        "name": "SAN JOAQUIN RIVER NEAR MENDOTA",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.810505",
+        "lon": "-120.378227"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-120.378227", "36.810505"]
@@ -610,7 +1198,13 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "NEW",
+        "name": "SAN JOAQUIN RIVER NEAR NEWMAN",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.350494",
+        "lon": "-120.97715"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-120.97715", "37.350494"]
@@ -618,12 +1212,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SJS",
+        "name": "SAN JOAQUIN RIVER NEAR STEVINSON",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.295",
+        "lon": "-120.851"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.851", "37.295"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "VNS",
+        "name": "SAN JOAQUIN RIVER NEAR VERNALIS",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.676041",
+        "lon": "-121.266327"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.266327", "37.676041"]
@@ -631,27 +1237,57 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SDP",
+        "name": "SAN JOAQUIN R NR DOS PALOS",
+        "basin": "SAN JOAQUIN R",
+        "lat": "36.994",
+        "lon": "-120.5015"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.5015", "36.994"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SWA",
+        "name": "SAN JOAQUIN R NR WASHINGTON RD",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.11532",
+        "lon": "-120.587"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.587", "37.11532"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "SFS",
+        "name": "STOCKTON FIRE STATION",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.999",
+        "lon": "-121.319"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.319", "37.999"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "TRP",
+        "name": "TRACY PUMPING PLANT",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.8",
+        "lon": "-121.585"
+      },
       "geometry": { "type": "Point", "coordinates": ["-121.585", "37.8"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "VER",
+        "name": "VERNALIS (USBR)",
+        "basin": "SAN JOAQUIN R",
+        "lat": "37.679376",
+        "lon": "-121.265002"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.265002", "37.679376"]
@@ -659,32 +1295,68 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "CX2",
+        "name": "DAILY X2 CALCULATION",
+        "basin": "SF BAY",
+        "lat": "37.8333",
+        "lon": "-122.4167"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.4167", "37.8333"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "GDW",
+        "name": "GOODWIN DAM",
+        "basin": "STANISLAUS R",
+        "lat": "37.8628",
+        "lon": "-120.6297"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.6297", "37.8628"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "KFS",
+        "name": "KNIGHTS FERRY AT SONORA ROAD BRIDGE",
+        "basin": "STANISLAUS R",
+        "lat": "37.819",
+        "lon": "-120.667"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.667", "37.819"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "NML",
+        "name": "NEW MELONES RESERVOIR",
+        "basin": "STANISLAUS R",
+        "lat": "37.9481",
+        "lon": "-120.525"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.525", "37.9481"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "OKW",
+        "name": "OAKDALE WEATHER STATION",
+        "basin": "STANISLAUS R",
+        "lat": "37.7347",
+        "lon": "-120.845"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.845", "37.7347"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "RPN",
+        "name": "RIPON",
+        "basin": "STANISLAUS R",
+        "lat": "37.729859",
+        "lon": "-121.110135"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.110135", "37.729859"]
@@ -692,17 +1364,35 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "GDC",
+        "name": "STANISLAUS R AT GOODWIN CANYON",
+        "basin": "STANISLAUS R",
+        "lat": "37.858",
+        "lon": "-120.635"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.635", "37.858"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "OBB",
+        "name": "STANISLAUS R AT ORANGE BLOSSOM BRIDGE",
+        "basin": "STANISLAUS R",
+        "lat": "37.783",
+        "lon": "-120.75"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.75", "37.783"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "RIP",
+        "name": "STANISLAUS RIVER AT RIPON",
+        "basin": "STANISLAUS R",
+        "lat": "37.729652",
+        "lon": "-121.110497"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-121.110497", "37.729652"]
@@ -710,12 +1400,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "OBS",
+        "name": "STANISLAUS R NEAR ORANGE BLOSSOM BRIDGE",
+        "basin": "STANISLAUS R",
+        "lat": "37.791",
+        "lon": "-120.765"
+      },
       "geometry": { "type": "Point", "coordinates": ["-120.765", "37.791"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "LWS",
+        "name": "LEWISTON (WATER QUALITY)",
+        "basin": "TRINITY R",
+        "lat": "40.719311",
+        "lon": "-122.803635"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.803635", "40.719311"]
@@ -723,12 +1425,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "CLE",
+        "name": "TRINITY LAKE",
+        "basin": "TRINITY R",
+        "lat": "40.801",
+        "lon": "-122.762"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.762", "40.801"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "NFH",
+        "name": "TRINITY R ABV NF TRINITY NR HELENA",
+        "basin": "TRINITY R",
+        "lat": "40.766533",
+        "lon": "-123.114479"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-123.114479", "40.766533"]
@@ -736,12 +1450,24 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "TNL",
+        "name": "TRINITY R AT LEWISTON",
+        "basin": "TRINITY R",
+        "lat": "40.719",
+        "lon": "-122.802"
+      },
       "geometry": { "type": "Point", "coordinates": ["-122.802", "40.719"] }
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "proj": "DGC",
+        "name": "TRINITY RIVER AT DOUGLAS CITY",
+        "basin": "TRINITY R",
+        "lat": "40.645279",
+        "lon": "-122.956665"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": ["-122.956665", "40.645279"]

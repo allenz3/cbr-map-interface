@@ -1,3 +1,5 @@
+import { selectedLocationsSet } from "./main.js";
+
 // input and save csv location data
 async function getLocation() {
     const response = await fetch('../data/csv/CV_SacPAS_Proj_LatLon.csv');
@@ -11,7 +13,7 @@ async function getLocation() {
         newElem.className = "location";  
         document.querySelector(".locationsList").appendChild(newElem);
         // returns array of location data
-        return {proj: col[0], name: col[1], basin: col[2], lat: col[3], lon: col[4]};
+        return { proj: col[0], name: col[1], basin: col[2], lat: col[3], lon: col[4] };
     });
     return locationsInfo;
 }
@@ -20,7 +22,9 @@ async function getLocation() {
 const locationsList = document.querySelector(".locationsList");
 locationsList.addEventListener("click", e => {
     // prevents event listener from selecting the select element
-    if (e.target.tagName === "OPTION") { // can also use e.target.className === "location"
+    if (e.target.tagName === "OPTION" && !selectedLocationsSet.has(e.target.innerHTML)) { // can also use e.target.className === "location"
+        selectedLocationsSet.add(e.target.innerHTML);
+        console.log(selectedLocationsSet);
         const newElem = document.createElement("li");
         newElem.innerHTML = e.target.innerHTML;
         newElem.className = "selectedLocations"; 
@@ -31,7 +35,9 @@ locationsList.addEventListener("click", e => {
 // remove location by clicking on the list element directly
 const selectedLocationsList = document.querySelector(".selectedLocationsList");
 selectedLocationsList.addEventListener("click", e => {
-    const child = document.querySelector(".selectedLocations");
+    selectedLocationsSet.delete(e.target.innerHTML);
+    console.log(selectedLocationsSet);
+    const child = e.target;
     selectedLocationsList.removeChild(child);
 });
 

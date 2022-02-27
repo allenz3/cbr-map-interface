@@ -1,3 +1,5 @@
+import { selectedLocationsSet } from "./main.js";
+
 // Map View Interactions
 // hold alt + left click and drag mouse cursor to rotate
 const dragRotateInteraction = new ol.interaction.DragRotate({
@@ -16,11 +18,11 @@ drawInteraction.on('drawend', function(e) {
     console.log(drawnFeatures.features[0].geometry.coordinates);
 });
 
-const selectedPoints = new Set();
 const selectPoints = function(curr) {
+    const locationString = curr.A.name + " (" + curr.A.proj + ")";
     if (curr.getGeometry().getType() === 'Point') {
-        if (selectedPoints.has(curr)) { // selected point is unselected
-            selectedPoints.delete(curr);
+        if (selectedLocationsSet.has(locationString)) { // selected point is unselected
+            selectedLocationsSet.delete(locationString);
             curr.setStyle(
                 new ol.style.Style({
                     image: new ol.style.Circle({
@@ -36,7 +38,7 @@ const selectPoints = function(curr) {
                 })
             )
         } else { // unselected point is selected
-            selectedPoints.add(curr); 
+            selectedLocationsSet.add(locationString); 
             curr.setStyle(
                 new ol.style.Style({
                     image: new ol.style.Circle({
@@ -53,7 +55,8 @@ const selectPoints = function(curr) {
             )
         }
     }
+    console.log(selectedLocationsSet);
 }
 
-export default {dragRotateInteraction, drawInteraction, selectPoints};
+export default { dragRotateInteraction, drawInteraction, selectPoints };
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export
