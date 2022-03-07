@@ -32,6 +32,8 @@ const locationGeoJSON = new ol.layer.Vector({
     })
 });
 
+const source = locationGeoJSON.getSource().Uu;
+
 // Vector Layer Group
 const vectorLayerGroup = new ol.layer.Group({
     layers: [
@@ -39,4 +41,4 @@ const vectorLayerGroup = new ol.layer.Group({
     ]
 });
 
-export default vectorLayerGroup;
+export default { vectorLayerGroup, source };
