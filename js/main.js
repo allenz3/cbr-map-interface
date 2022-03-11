@@ -127,7 +127,8 @@ function init() {
                                 color: [0, 0, 0, 1],
                                 width: 2
                             })
-                        })
+                        }),
+                        zIndex: 1
                     })
                 )
             } else { // color points white if not selected
@@ -142,9 +143,10 @@ function init() {
                                 color: [0, 0, 0, 1],
                                 width: 2
                             })
-                        })
+                        }),
+                        zIndex: 0
                     })
-                )
+                )   
             }
         });
     }
