@@ -46,7 +46,7 @@ function init() {
     // create location option selection list
     locations.getLocation();
 
-    // set containing all locations
+    // fill set containing all locations
     function fillSet(param) {
         Object.values(param).forEach(location => locationsSet.add(location));
     }

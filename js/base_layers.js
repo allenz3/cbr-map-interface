@@ -87,16 +87,11 @@ const baseLayerGroup = new ol.layer.Group({
 });
 
 // Layer Switcher Logic for BaseLayers
-const baseLayerElements = document.querySelectorAll('.sidebar > input[type=radio]');
-for (let baseLayerElement of baseLayerElements) {
-    baseLayerElement.addEventListener('change', function() {
-        let baseLayerElementValue = this.value;
-        baseLayerGroup.getLayers().forEach(function(element, index, array) {
-            let baseLayerName = element.get('title');
-            element.setVisible(baseLayerName === baseLayerElementValue)
-        })
-    })
-}
-// https://www.w3schools.com/jsref/met_document_queryselectorall.asp
+const baseLayerElements = document.querySelector('select[name=base_layers]');
+baseLayerElements.addEventListener('change', function() {
+    baseLayerGroup.getLayers().forEach(function(layer) {
+        layer.setVisible(layer.get('title') === baseLayerElements.value);
+    });
+})
 
 export default baseLayerGroup;

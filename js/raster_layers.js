@@ -75,19 +75,19 @@ const rasterLayerGroup = new ol.layer.Group({
 });
 
 // Layer Switcher Logic for Raster Layers
-const tileRasterLayerElements = document.querySelectorAll('.sidebar > input[type=checkbox]');
-for (let tileRasterLayerElement of tileRasterLayerElements) {
-    tileRasterLayerElement.addEventListener('change', function() {
-        let tileRasterLayerElementValue = this.value;
-        let tileRasterLayer;
-
-        rasterLayerGroup.getLayers().forEach(function(element, index, array) {
-            if (tileRasterLayerElementValue === element.get('title')) {
-                tileRasterLayer = element;
-            }
-        })
-        this.checked ? tileRasterLayer.setVisible(true) : tileRasterLayer.setVisible(false);
-    })
-}
+const rasterLayerElements = document.querySelector('select[name=additional_layers]');
+const selectedLayers = new Set();
+rasterLayerElements.addEventListener('click', function(e) {
+    if (!selectedLayers.has(rasterLayerElements.value)) {
+        e.target.innerHTML += "✅";
+        selectedLayers.add(rasterLayerElements.value);
+    } else {
+        e.target.innerHTML = e.target.innerHTML.substring(0, e.target.innerHTML.length - 2);
+        selectedLayers.delete(rasterLayerElements.value);
+    }
+    rasterLayerGroup.getLayers().forEach(function(layer) {
+        layer.setVisible(selectedLayers.has(layer.get('title')));
+    });
+})
 
 export default rasterLayerGroup;
