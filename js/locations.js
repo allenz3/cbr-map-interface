@@ -1,3 +1,5 @@
+const locationsSet = new Set();
+
 // input and save csv location data
 async function getLocation() { // fill the sidebar with location options
     // csv implementation
@@ -18,13 +20,30 @@ async function getLocation() { // fill the sidebar with location options
     const response = await fetch('./data/json/locationsGeoJSON.geojson');
     const locationData = await response.json();
     locationData["features"].forEach((feature) => {
+        const locationString = feature["properties"]["name"] + " (" + feature["properties"]["proj"] + ")";
+        locationsSet.add(locationString);
         const newElem = document.createElement("option");
-        newElem.innerHTML = feature["properties"]["name"] + " (" + feature["properties"]["proj"] + ")";
+        newElem.innerHTML = locationString;
         newElem.className = "location";  
         document.querySelector(".locationsList").appendChild(newElem);
     });
     //return locationsInfo;
 }
+
+// search filter by keyword based on user input
+const search = document.querySelector(".search-filter").addEventListener("input", () => {
+    const searchInput = document.querySelector(".search-filter").value;
+    const locationsList = document.querySelector(".locationsList");
+    locationsList.innerHTML = "";
+    locationsSet.forEach((locationString) => {
+        if ((locationString.toLowerCase()).includes(searchInput.toLowerCase())) {
+            const newElem = document.createElement("option");
+            newElem.innerHTML = locationString;
+            newElem.className = "location";  
+            locationsList.appendChild(newElem);
+        }
+    });
+})
 
 export default { getLocation };
 

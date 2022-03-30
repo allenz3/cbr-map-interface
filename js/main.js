@@ -152,22 +152,6 @@ function init() {
     }
 }
 
-document.querySelector(".search-filter").addEventListener("input", (e) => {
-    const searchInput = document.querySelector(".search-filter").value;
-    const locationsList = document.querySelector(".locationsList");
-    locationsList.innerHTML = "";
-    locationsSet.forEach((location) => {
-        const locationString = location.A.name + " (" + location.A.proj + ")";
-        if ((locationString.toLowerCase()).includes(searchInput.toLowerCase())) {
-            console.log("here")
-            const newElem = document.createElement("option");
-            newElem.innerHTML = locationString;
-            newElem.className = "location";  
-            locationsList.appendChild(newElem);
-        }
-    });
-})
-
 export { locationsSet, selectedLocationsSet };
 
 // https://openlayers.org/en/latest/apidoc/module-ol_layer_Vector-VectorLayer.html#getSource
