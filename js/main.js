@@ -20,9 +20,9 @@ function init() {
             // center: [-13392860.93604214, 6011494.743803331],
             // center: ol.proj.transform([-120.740135, 47.751076], 'EPSG:4326', 'EPSG:3857'),
             center: ol.proj.transform([-120.740135, 38.751076], 'EPSG:4326', 'EPSG:3857'),
-            zoom: 7
-            // maxZoom: 6,
-            // minZoom: 2,
+            zoom: 7,
+            maxZoom: 14,
+            minZoom: 6
             // rotation: 0.5
             // https://stackoverflow.com/quiestions/27820784/openlayers-3-center-map
         }),
@@ -51,6 +51,13 @@ function init() {
         Object.values(param).forEach(location => locationsSet.add(location));
     }
     setTimeout(fillSet, 500, vectorLayers.source);
+
+    // search filter by keyword based on user input
+    const deselectAll = document.querySelector(".deselect-all").addEventListener("click", () => {
+        selectedLocationsSet.clear();
+        fillSidebar(selectedLocationsSet);
+        fillPoints(locationsSet, selectedLocationsSet);
+    })
 
     // if location option is clicked
     const locationsList = document.querySelector(".locationsList");
