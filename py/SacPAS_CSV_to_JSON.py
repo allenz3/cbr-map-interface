@@ -12,7 +12,7 @@ with open('./data/csv/CV_SacPAS_Proj_LatLon.csv', 'r') as locations:
 
     next(csv_reader)
 
-    with open("./data/json/locationsGeoJSON.geojson", "w") as new_file:
+    with open("./data/json/SacPAS_locations_GeoJSON.geojson", "w") as new_file:
 
         locations = {
             "type": "FeatureCollection",

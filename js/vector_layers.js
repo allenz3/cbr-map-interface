@@ -20,7 +20,7 @@ const circleStyle = new ol.style.Circle({
 
 const locationGeoJSON = new ol.layer.Vector({
     source: new ol.source.Vector({
-        url: './data/json/locationsGeoJSON.geojson',
+        url: './data/json/SacPAS_locations_GeoJSON.geojson',
         format: new ol.format.GeoJSON()
     }),
     visible: true,

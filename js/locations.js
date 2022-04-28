@@ -21,7 +21,7 @@ async function getLocation() { // fill the sidebar with location options
     //     return { proj: col[0], name: col[1], basin: col[2], lat: col[3], lon: col[4] };
     // });
     // json implementation
-    const response = await fetch('./data/json/locationsGeoJSON.geojson');
+    const response = await fetch('./data/json/SacPAS_locations_GeoJSON.geojson');
     const locationData = await response.json();
     locationData["features"].forEach((feature) => {
         const locationString = feature["properties"]["name"] + " (" + feature["properties"]["proj"] + ")";
