@@ -27,7 +27,7 @@ function init() {
     map.addOverlay(overlays.popup);
 
     // create location option selection list
-    locations.getLocation();
+    setTimeout(locations.initLocations, 500, vectorLayers.source);
 }
 
 // https://openlayers.org/en/latest/apidoc/module-ol_layer_Vector-VectorLayer.html#getSource

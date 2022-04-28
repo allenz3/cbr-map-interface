@@ -28,6 +28,11 @@ body {
     bottom: 21%;
 }
 
+.dataset {
+    margin-top: 2rem;
+    display: block;
+}
+
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
 https://www.w3schools.com/CSSref/pr_list-style-type.asp */
 ul .selectedLocations {

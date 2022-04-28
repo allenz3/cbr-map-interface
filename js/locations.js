@@ -1,43 +1,22 @@
-import vectorLayers from './vector_layers.js';
 import map from './view.js';
+import styles from './styles.js';
 
 const locationsSet = new Set();
 const selectedLocationsSet = new Set();
 
-// input and save csv location data
-async function getLocation() { // fill the sidebar with location options
-    // csv implementation
-    // const response = await fetch('../data/csv/CV_SacPAS_Proj_LatLon.csv');
-    // const data = await response.text();
-    // const locations = data.split('\n').slice(1);
-    // const locationsInfo = locations.map(location => {
-    //     const col = location.split(',');
-    //     // creates location list in page sidebar
-    //     const newElem = document.createElement("option");
-    //     newElem.innerHTML = col[1] + " (" + col[0] + ")";
-    //     newElem.className = "location";  
-    //     document.querySelector(".locationsList").appendChild(newElem);
-    //     // returns array of location data
-    //     return { proj: col[0], name: col[1], basin: col[2], lat: col[3], lon: col[4] };
-    // });
-    // json implementation
-    const response = await fetch('./data/json/SacPAS_locations_GeoJSON.geojson');
-    const locationData = await response.json();
-    locationData["features"].forEach((feature) => {
-        const locationString = feature["properties"]["name"] + " (" + feature["properties"]["proj"] + ")";
-        const newElem = document.createElement("option");
-        newElem.innerHTML = locationString;
-        newElem.className = "location";  
-        document.querySelector(".locationsList").appendChild(newElem);
-    });
-    //return locationsInfo;
-}
-
 // fill set containing all locations
-function fillSet(param) {
-    Object.values(param).forEach(location => locationsSet.add(location));
+function initLocations(param) {
+    Object.values(param).forEach(location => {
+        locationsSet.add(location)
+        locationsSet.forEach((location) => {
+            const locationString = location.A.name + " (" + location.A.proj + ")";
+            const newElem = document.createElement("option");
+            newElem.innerHTML = locationString;
+            newElem.className = "location";  
+            document.querySelector(".locationsList").appendChild(newElem);
+        });
+    });
 }
-setTimeout(fillSet, 500, vectorLayers.source);
 
 // search filter by keyword based on user input
 const deselectAll = document.querySelector(".deselect-all").addEventListener("click", () => {
@@ -88,7 +67,7 @@ function findLocation(locationOption) { // argument: option element from locatio
 }
 
 // if a point on the map is clicked
-map.on("singleclick", point => {
+const pointClick = map.on("singleclick", point => {
     map.forEachFeatureAtPixel(point.pixel, point => {
         if (point.getGeometry().getType() === 'Point') {
             locationsSet.forEach((location) => {
@@ -127,42 +106,14 @@ function fillSidebar(selectedLocationsSet) {
 function fillPoints(locationsSet, selectedLocationsSet) {
     locationsSet.forEach((location) => {
         if (selectedLocationsSet.has(location)) { // color points blue if selected
-            location.setStyle(
-                new ol.style.Style({
-                    image: new ol.style.Circle({
-                        fill: new ol.style.Fill({
-                            color: [0, 153, 255, 1]
-                        }),
-                        radius: 8,
-                        stroke: new ol.style.Stroke({
-                            color: [0, 0, 0, 1],
-                            width: 2
-                        })
-                    }),
-                    zIndex: 1
-                })
-            )
+            location.setStyle(styles.bluePoint);
         } else { // color points white if not selected
-            location.setStyle(
-                new ol.style.Style({
-                    image: new ol.style.Circle({
-                        fill: new ol.style.Fill({
-                            color: [255, 255, 255, 1]
-                        }),
-                        radius: 8,
-                        stroke: new ol.style.Stroke({
-                            color: [0, 0, 0, 1],
-                            width: 2
-                        })
-                    }),
-                    zIndex: 0
-                })
-            )   
+            location.setStyle(styles.whitePoint);
         }
     });
 }
 
-export default { getLocation };
+export default { initLocations }
 
 // https://youtu.be/RfMkdvN-23o
 // https://code-boxx.com/add-html-code-in-javascript/#:~:text=WAYS%20TO%20ADD%20HTML%20CODE%201%20METHOD%201%29,TAKE%20EXTRA%20NOTE%20OF%20THE%20LOADING%20ORDER%21%20
