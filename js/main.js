@@ -28,6 +28,7 @@ function init() {
 
     // create location option selection list
     setTimeout(locations.initLocations, 500, vectorLayers.source);
+    setTimeout(locations.initLocations, 500, vectorLayers.source2);
 }
 
 // https://openlayers.org/en/latest/apidoc/module-ol_layer_Vector-VectorLayer.html#getSource

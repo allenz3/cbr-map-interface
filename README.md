@@ -41,4 +41,3 @@ Still in development. The plan is to have the SacPAS locations displayed when th
     - styles.js contains the styling for the map interface
     - vector_layers.js creates the location points for the map interface
     - view.js contains the map view for the application
-

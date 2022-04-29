@@ -7,8 +7,8 @@ const map = new ol.Map({
         center: ol.proj.transform([-120.740135, 38.751076], 'EPSG:4326', 'EPSG:3857'),
         zoom: 7,
         maxZoom: 16,
-        minZoom: 6,
-        extent: [-14500000,3500000,-12000000,5500000]
+        minZoom: 6
+        // extent: [-14500000,3500000,-12000000,5500000]
         // rotation: 0.5
         // https://stackoverflow.com/quiestions/27820784/openlayers-3-center-map
     }),
