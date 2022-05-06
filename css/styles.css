@@ -8,6 +8,15 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
 }
 
+.index-heading {
+    margin: 2rem;
+}
+
+.link {
+    display: block;
+    margin: 2rem;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: 30vw 70vw;
@@ -26,11 +35,6 @@ body {
 
 .ol-scale-line {
     bottom: 21%;
-}
-
-.dataset {
-    margin-top: 2rem;
-    display: block;
 }
 
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type

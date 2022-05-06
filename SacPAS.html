@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OpenLayers Demo</title>
+        <link rel="stylesheet" href="./libs/v6.10.0-dist/ol.css">
+        <link rel="stylesheet" href="./css/styles.css">
+    </head>
+    <body>
+        <div class="grid-container">
+            <div class="grid-1">
+                <div class="sidebar">
+                    <h2>Locations</h2>
+                    <input class="search-filter" type="text" placeholder="search here">
+                    <br></br>
+                    <select class="locationsList" multiple>
+                    </select>
+
+                    <h2>Selected Locations</h2>
+                    <p>(click on a location to deselect it)</p>
+                    <button class="deselect-all">Deselect All</button>
+                    <ul class="selectedLocationsList">
+                    </ul>
+                    
+                    <!-- https://www.w3schools.com/tags/tag_select.asp -->
+                    <h2>Base Layers</h2>
+                    <select name="base_layers">
+                        <option value='OSMStandard' checked>OSM Standard</option>
+                        <option value='OSMHumanitarian'>OSM Humanitarian</option>
+                        <option value='BingMaps'>Bing Maps</option>
+                        <option value='CartoDarkAll'>Carto Dark All</option>
+                        <option value='StamenTerrainWithLabels'>Stamen Terrain With Labels</option>
+                        <option value='StamenTerrain'>Stamen Terrain</option>
+                        <option value='VectorTileLayerOpenStreetMap'>Vector Tile Layer OpenStreetMap</option>
+                    </select>
+
+                    <h2>Additional Layers</h2>
+                    <select name="additional_layers" multiple>
+                        <option value='TileArcGISLayer'>Tile ArcGIS Layer<br>
+                        <option value='TileArcGISLayer2'>Tile ArcGIS Layer 2<br>
+                        <option value='TileArcGISLayer3'>Tile ArcGIS Layer 3<br>
+                        <option value='NOAAWMSLayer'>NOAA WMS Layer<br>
+                        <option value='TileDebugLayer'>Tile Debug Layer<br>
+                        <option value='openStreetMapFragmentStatic'>OpenStreetMap Humanitarian Fragment Static<br>
+                    </select>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div id='js-map' class='map'>
+                    <p id='popup-coordinates'></p>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src='./libs/v6.10.0-dist/ol.js'></script> 
+    <script src="https://cdn.maptiler.com/ol-mapbox-style/v5.0.2/olms.js"></script>
+    <script type='module' src='./js/SacPAS_main.js'></script>
+</html>

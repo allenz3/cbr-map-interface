@@ -11,9 +11,9 @@ window.onload = init
 
 function init() {
     
-    // map.on('click', function(e) {
-    //     console.log(e.coordinate);
-    // });
+    map.on('click', function(e) {
+        console.log(e.coordinate);
+    });
 
     map.addInteraction(interactions.dragRotateInteraction);
     // map.addInteraction(interactions.drawInteraction);
@@ -21,14 +21,13 @@ function init() {
     // Layers
     map.addLayer(baseLayerGroup);
     map.addLayer(rasterLayerGroup);
-    map.addLayer(vectorLayers.vectorLayerGroup);
+    map.addLayer(vectorLayers.locationGeoJSON);
 
     // Overlays
     map.addOverlay(overlays.popup);
 
     // create location option selection list
-    setTimeout(locations.initLocations, 500, vectorLayers.source);
-    setTimeout(locations.initLocations, 500, vectorLayers.source2);
+    setTimeout(locations.initLocations, 100, vectorLayers.source);
 }
 
 // https://openlayers.org/en/latest/apidoc/module-ol_layer_Vector-VectorLayer.html#getSource

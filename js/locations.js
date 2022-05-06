@@ -6,22 +6,24 @@ const selectedLocationsSet = new Set();
 
 // fill set containing all locations
 function initLocations(param) {
+    locationsSet.clear();
+    selectedLocationsSet.clear();
     Object.values(param).forEach(location => {
         locationsSet.add(location)
-        locationsSet.forEach((location) => {
-            const locationString = location.A.name + " (" + location.A.proj + ")";
-            const newElem = document.createElement("option");
-            newElem.innerHTML = locationString;
-            newElem.className = "location";  
-            document.querySelector(".locationsList").appendChild(newElem);
-        });
+    });
+    locationsSet.forEach((location) => {
+        const locationString = location.A.name + " (" + location.A.proj + ")";
+        const newElem = document.createElement("option");
+        newElem.innerHTML = locationString;
+        newElem.className = "location";  
+        document.querySelector(".locationsList").appendChild(newElem);
     });
 }
 
 // search filter by keyword based on user input
 const deselectAll = document.querySelector(".deselect-all").addEventListener("click", () => {
     selectedLocationsSet.clear();
-    fillSidebar(selectedLocationsSet);
+    fillSidebar(locationsSet, selectedLocationsSet);
     fillPoints(locationsSet, selectedLocationsSet);
 })
 
@@ -53,7 +55,7 @@ function findLocation(locationOption) { // argument: option element from locatio
     if (locationOption.target.tagName === "OPTION" || locationOption.target.tagName === "LI") { // can also use e.target.className === "location"
         locationsSet.forEach((location) => {
             const locationString = location.A.name + " (" + location.A.proj + ")";
-            if (locationString === locationOption.target.innerHTML) {
+            if (locationString === locationOption.target.innerText) {
                 if (!selectedLocationsSet.has(location)) {
                     selectedLocationsSet.add(location);
                 } else {
@@ -61,7 +63,7 @@ function findLocation(locationOption) { // argument: option element from locatio
                 }
             }
         });
-        fillSidebar(selectedLocationsSet);
+        fillSidebar(locationsSet, selectedLocationsSet);
         fillPoints(locationsSet, selectedLocationsSet);
     }
 }
@@ -81,17 +83,16 @@ const pointClick = map.on("singleclick", point => {
             });
         }
     });
-    fillSidebar(selectedLocationsSet);
+    fillSidebar(locationsSet, selectedLocationsSet);
     fillPoints(locationsSet, selectedLocationsSet);
 });
 
 // fills the selected locations list sidebar after a location option selection or a mouse click on a point
-function fillSidebar(selectedLocationsSet) {
+function fillSidebar(locationsSet, selectedLocationsSet) {
     const selectedLocationsList = document.querySelector(".selectedLocationsList");
     selectedLocationsList.innerHTML = "";
     selectedLocationsSet.forEach((location) => {
         if (selectedLocationsSet.has(location)) { // if location is selected put it in the sidebar
-            selectedLocationsSet.add(location);
             const newElem = document.createElement("li");
             newElem.innerHTML = location.A.name + " (" + location.A.proj + ")";
             newElem.className = "selectedLocations"; 

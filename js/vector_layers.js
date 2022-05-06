@@ -1,22 +1,4 @@
-const fillStyle = new ol.style.Fill({
-    color: [245, 49, 5, 1]
-});
-
-const strokeStyle = new ol.style.Stroke({
-    color: [0, 0, 0, 1],
-    width: 2,
-    // lineCap: 'square',
-    // lineJoin: 'bevel',
-    // lineDash: [3, 3]
-});
-
-const circleStyle = new ol.style.Circle({
-    fill: new ol.style.Fill({
-        color: [255, 255, 255, 1]
-    }),
-    radius: 8,
-    stroke: strokeStyle
-});
+import styles from './styles.js';
 
 const locationGeoJSON = new ol.layer.Vector({
     source: new ol.source.Vector({
@@ -26,9 +8,9 @@ const locationGeoJSON = new ol.layer.Vector({
     visible: true,
     title: 'locationGeoJSON',
     style: new ol.style.Style({
-        fill: fillStyle,
-        stroke: strokeStyle,
-        image: circleStyle
+        fill: styles.fillStyle,
+        stroke: styles.strokeStyle,
+        image: styles.circleStyle
     })
 });
 
@@ -40,20 +22,13 @@ const locationGeoJSON2 = new ol.layer.Vector({
     visible: true,
     title: 'locationGeoJSON2',
     style: new ol.style.Style({
-        fill: fillStyle,
-        stroke: strokeStyle,
-        image: circleStyle
+        fill: styles.fillStyle,
+        stroke: styles.strokeStyle,
+        image: styles.circleStyle
     })
 });
 
 const source = locationGeoJSON.getSource().Uu;
 const source2 = locationGeoJSON2.getSource().Uu;
 
-// Vector Layer Group
-const vectorLayerGroup = new ol.layer.Group({
-    layers: [
-        locationGeoJSON, locationGeoJSON2
-    ]
-});
-
-export default { vectorLayerGroup, source, source2 };
+export default { locationGeoJSON, locationGeoJSON2, source, source2 };
