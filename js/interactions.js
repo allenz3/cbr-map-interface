@@ -16,6 +16,6 @@ drawInteraction.on('drawend', function(e) {
     console.log(drawnFeatures.features[0].geometry.coordinates);
 });
 
-export default { dragRotateInteraction, drawInteraction };
+export { dragRotateInteraction, drawInteraction };
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export

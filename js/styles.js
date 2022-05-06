@@ -46,4 +46,4 @@ const whitePoint = new ol.style.Style({
     zIndex: 0
 });
 
-export default { fillStyle, strokeStyle, circleStyle, bluePoint, whitePoint }
+export { fillStyle, strokeStyle, circleStyle, bluePoint, whitePoint };

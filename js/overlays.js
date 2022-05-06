@@ -14,4 +14,4 @@ const popup = new ol.Overlay({
 //     popupContainerElement.innerHTML = clickedCoordinate;
 // });
 
-export default {popup};
+export { popup };

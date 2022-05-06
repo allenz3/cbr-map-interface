@@ -1,10 +1,10 @@
 import map from './view.js';
 import baseLayerGroup from './base_layers.js';
 import rasterLayerGroup from './raster_layers.js';
-import vectorLayers from './vector_layers.js';
-import interactions from './interactions.js';
-import overlays from './overlays.js';
-import locations from './locations.js';
+import { locationGeoJSON, source } from './vector_layers.js';
+import { dragRotateInteraction, drawInteraction } from './interactions.js';
+import { popup } from './overlays.js';
+import initLocations from './locations.js';
 // https://youtu.be/cRHQNNcYf6s
 
 window.onload = init
@@ -15,19 +15,19 @@ function init() {
         console.log(e.coordinate);
     });
 
-    map.addInteraction(interactions.dragRotateInteraction);
-    // map.addInteraction(interactions.drawInteraction);
+    map.addInteraction(dragRotateInteraction);
+    // map.addInteraction(drawInteraction);
 
     // Layers
     map.addLayer(baseLayerGroup);
     map.addLayer(rasterLayerGroup);
-    map.addLayer(vectorLayers.locationGeoJSON);
+    map.addLayer(locationGeoJSON);
 
     // Overlays
-    map.addOverlay(overlays.popup);
+    map.addOverlay(popup);
 
     // create location option selection list
-    setTimeout(locations.initLocations, 100, vectorLayers.source);
+    setTimeout(initLocations, 100, source);
 }
 
 // https://openlayers.org/en/latest/apidoc/module-ol_layer_Vector-VectorLayer.html#getSource

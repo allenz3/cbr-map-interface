@@ -1,5 +1,5 @@
 import map from './view.js';
-import styles from './styles.js';
+import { bluePoint, whitePoint } from './styles.js';
 
 const locationsSet = new Set();
 const selectedLocationsSet = new Set();
@@ -107,14 +107,14 @@ function fillSidebar(locationsSet, selectedLocationsSet) {
 function fillPoints(locationsSet, selectedLocationsSet) {
     locationsSet.forEach((location) => {
         if (selectedLocationsSet.has(location)) { // color points blue if selected
-            location.setStyle(styles.bluePoint);
+            location.setStyle(bluePoint);
         } else { // color points white if not selected
-            location.setStyle(styles.whitePoint);
+            location.setStyle(whitePoint);
         }
     });
 }
 
-export default { initLocations }
+export default initLocations;
 
 // https://youtu.be/RfMkdvN-23o
 // https://code-boxx.com/add-html-code-in-javascript/#:~:text=WAYS%20TO%20ADD%20HTML%20CODE%201%20METHOD%201%29,TAKE%20EXTRA%20NOTE%20OF%20THE%20LOADING%20ORDER%21%20
