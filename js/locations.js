@@ -5,10 +5,10 @@ const locationsSet = new Set();
 const selectedLocationsSet = new Set();
 
 // fill set containing all locations
-function initLocations(param) {
+function initLocations(source) {
     locationsSet.clear();
     selectedLocationsSet.clear();
-    Object.values(param).forEach(location => {
+    Object.values(source).forEach(location => {
         locationsSet.add(location)
     });
     locationsSet.forEach((location) => {

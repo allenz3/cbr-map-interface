@@ -1,4 +1,5 @@
 import map from './view.js';
+import { setCenterPoint } from './view.js';
 import baseLayerGroup from './base_layers.js';
 import rasterLayerGroup from './raster_layers.js';
 import { locationGeoJSON2, source2 } from './vector_layers.js';
@@ -10,6 +11,9 @@ import initLocations from './locations.js';
 window.onload = init
 
 function init() {
+
+    // set view center
+    setCenterPoint(-13200000, 5800000);
     
     map.on('click', function(e) {
         console.log(e.coordinate);
