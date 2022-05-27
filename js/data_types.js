@@ -2,7 +2,7 @@ const dataTypesAndLocations = new Map();
 const dataTypes = new Set();
 
 async function makeInventory() {
-    const response = await fetch('../data/json/year_and_data_types.json');
+    const response = await fetch('./data/json/year_and_data_types.json');
     const inventory = await response.json();
     inventory["river_data"].forEach((siteData) => {
         const siteCode = siteData["site_code"];
