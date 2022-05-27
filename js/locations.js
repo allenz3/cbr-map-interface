@@ -1,5 +1,6 @@
 import map from './view.js';
 import { bluePoint, whitePoint } from './styles.js';
+import { dataTypes, dataTypesAndLocations } from './data_types.js';
 
 const locationsSet = new Set();
 const selectedLocationsSet = new Set();
@@ -86,6 +87,26 @@ const pointClick = map.on("singleclick", point => {
     fillSidebar(locationsSet, selectedLocationsSet);
     fillPoints(locationsSet, selectedLocationsSet);
 });
+
+// if data type option is clicked
+const dataTypeSelector = document.querySelector(".data-type");
+dataTypeSelector.addEventListener("change", dataTypeSelected => findDataType(dataTypeSelected));
+// https://stackoverflow.com/questions/47058077/how-can-i-add-an-event-listener-to-a-select-element
+
+// if data type is selected
+function findDataType(dataTypeSelected) { // argument: option element from location list
+    selectedLocationsSet.clear();
+    dataTypesAndLocations.get(dataTypeSelected.target.value).forEach((siteCode) => {
+        locationsSet.forEach((location) => {
+            if (siteCode === location.A.proj) {
+                selectedLocationsSet.add(location);
+            }
+        });
+    });
+    fillSidebar(locationsSet, selectedLocationsSet);
+    fillPoints(locationsSet, selectedLocationsSet);
+}
+// https://stackoverflow.com/questions/17481098/how-to-get-the-selected-value-on-select-tag-using-javascript
 
 // fills the selected locations list sidebar after a location option selection or a mouse click on a point
 function fillSidebar(locationsSet, selectedLocationsSet) {

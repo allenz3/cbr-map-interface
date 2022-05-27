@@ -5,12 +5,15 @@ import rasterLayerGroup from './raster_layers.js';
 import { dragRotateInteraction, drawInteraction } from './interactions.js';
 import { popup } from './overlays.js';
 import initLocations from './locations.js';
+import { makeInventory, fillDataTypes } from './data_types.js';
 // https://youtu.be/cRHQNNcYf6s
 
 function createMap(long, lat, locationGeoJSON, source) {
     
     // set view center
     setCenterPoint(long, lat);
+    makeInventory();
+    setTimeout(fillDataTypes, 100);
 
     map.on('click', function(e) {
         console.log(e.coordinate);

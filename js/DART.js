@@ -5,5 +5,5 @@ window.onload = init;
 
 function init() {
     // DART
-    createMap(-13200000, 5800000, locationGeoJSON2, source2);
+    createMap(-13200000, 5850000, locationGeoJSON2, source2);
 }
