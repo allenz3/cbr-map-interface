@@ -42,3 +42,9 @@ https://www.w3schools.com/CSSref/pr_list-style-type.asp */
 ul .selectedLocations {
     list-style-type: '−';
 }
+
+.overlay-text {
+    background-color: whitesmoke;
+    padding: 1px 6px;
+    border: 1px solid black;
+}

@@ -13,7 +13,7 @@ function initLocations(source) {
         locationsSet.add(location)
     });
     locationsSet.forEach((location) => {
-        const locationString = location.A.name + " (" + location.A.proj + ")";
+        const locationString = location.get("name") + " (" + location.get("proj") + ")";
         const newElem = document.createElement("option");
         newElem.innerHTML = locationString;
         newElem.className = "location";  
@@ -34,7 +34,7 @@ const search = document.querySelector(".search-filter").addEventListener("input"
     const locationsList = document.querySelector(".locationsList");
     locationsList.innerHTML = "";
     locationsSet.forEach((location) => {
-        const locationString = location.A.name + " (" + location.A.proj + ")";
+        const locationString = location.get("name") + " (" + location.get("proj") + ")";
         if ((locationString.toLowerCase()).includes(searchInput.toLowerCase())) {
             const newElem = document.createElement("option");
             newElem.innerHTML = locationString;
@@ -55,7 +55,7 @@ function findLocation(locationOption) { // argument: option element from locatio
     // prevents event listener from selecting the select element (entire list)
     if (locationOption.target.tagName === "OPTION" || locationOption.target.tagName === "LI") { // can also use e.target.className === "location"
         locationsSet.forEach((location) => {
-            const locationString = location.A.name + " (" + location.A.proj + ")";
+            const locationString = location.get("name") + " (" + location.get("proj") + ")";
             if (locationString === locationOption.target.innerText) {
                 if (!selectedLocationsSet.has(location)) {
                     selectedLocationsSet.add(location);
@@ -69,12 +69,32 @@ function findLocation(locationOption) { // argument: option element from locatio
     }
 }
 
+// location name pop-up
+const overlayContainerElement = document.querySelector(".overlay-container");
+const overlayLayer = new ol.Overlay({
+    element: overlayContainerElement
+})
+map.addOverlay(overlayLayer);
+const overlayFeatureName = document.getElementById("feature-name");
+
+// when the pointer hovers over a location point, the location name appears
+const pointMove = map.on("pointermove", function(e) {
+    overlayLayer.setPosition(undefined);
+    map.forEachFeatureAtPixel(e.pixel, function(feature) {
+        overlayLayer.setPosition(e.coordinate);
+        overlayLayer.setOffset([10, 10]);
+        overlayFeatureName.innerHTML = feature.get("name");
+    });
+});
+// https://openlayers.org/en/latest/apidoc/module-ol_MapBrowserEvent-MapBrowserEvent.html
+// https://openlayers.org/en/latest/apidoc/module-ol_Overlay-Overlay.html
+
 // if a point on the map is clicked
 const pointClick = map.on("singleclick", point => {
     map.forEachFeatureAtPixel(point.pixel, point => {
         if (point.getGeometry().getType() === 'Point') {
             locationsSet.forEach((location) => {
-                if (location.A.proj === point.A.proj) {
+                if (location.get("proj") === point.get("proj")) {
                     if (!selectedLocationsSet.has(location)) { // select point
                         selectedLocationsSet.add(location);
                     } else { // deselect point
@@ -98,7 +118,7 @@ function findDataType(dataTypeSelected) { // argument: option element from locat
     selectedLocationsSet.clear();
     dataTypesAndLocations.get(dataTypeSelected.target.value).forEach((siteCode) => {
         locationsSet.forEach((location) => {
-            if (siteCode === location.A.proj) {
+            if (siteCode === location.get("proj")) {
                 selectedLocationsSet.add(location);
             }
         });
@@ -115,7 +135,7 @@ function fillSidebar(locationsSet, selectedLocationsSet) {
     selectedLocationsSet.forEach((location) => {
         if (selectedLocationsSet.has(location)) { // if location is selected put it in the sidebar
             const newElem = document.createElement("li");
-            newElem.innerHTML = location.A.name + " (" + location.A.proj + ")";
+            newElem.innerHTML = location.get("name") + " (" + location.get("proj") + ")";
             newElem.className = "selectedLocations"; 
             document.querySelector(".selectedLocationsList").appendChild(newElem);
         }
