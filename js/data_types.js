@@ -15,10 +15,11 @@ async function makeInventory() {
             dataTypesAndLocations.get(param).add(siteCode);
         });
     });
+    fillDataTypes();
 }
 
+// fill drop-down menu with data types
 function fillDataTypes() {
-    console.log(dataTypes);
     dataTypes.forEach((dataType) => {
         const newElem = document.createElement("option");
         newElem.innerHTML = dataType;
@@ -27,7 +28,7 @@ function fillDataTypes() {
     });
 }
 
-export { makeInventory, fillDataTypes, dataTypes, dataTypesAndLocations };
+export { makeInventory, dataTypesAndLocations };
 
 // https://youtu.be/uxf0--uiX0I
 // https://www.w3schools.com/js/js_maps.asp

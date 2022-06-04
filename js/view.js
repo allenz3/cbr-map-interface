@@ -23,7 +23,7 @@ const map = new ol.Map({
 
 function setCenterPoint(long, lat) {
     map.getView().setCenter([long, lat]);
-    console.log(map.getView().getCenter());
+    // console.log(map.getView().getCenter());
 }
 
 export default map;

@@ -28,7 +28,4 @@ const locationGeoJSON2 = new ol.layer.Vector({
     })
 });
 
-const source = locationGeoJSON.getSource().Uu;
-const source2 = locationGeoJSON2.getSource().Uu;
-
-export { locationGeoJSON, locationGeoJSON2, source, source2 };
+export { locationGeoJSON, locationGeoJSON2 };

@@ -4,20 +4,17 @@ import baseLayerGroup from './base_layers.js';
 import rasterLayerGroup from './raster_layers.js';
 import { dragRotateInteraction, drawInteraction } from './interactions.js';
 import { popup } from './overlays.js';
-import initLocations from './locations.js';
-import { makeInventory, fillDataTypes } from './data_types.js';
+import { initLocations } from './locations.js';
+import { makeInventory } from './data_types.js';
 // https://youtu.be/cRHQNNcYf6s
 
-function createMap(long, lat, locationGeoJSON, source) {
+function createMap(long, lat, locationGeoJSON) {
     
     // set view center
     setCenterPoint(long, lat);
     makeInventory();
-    setTimeout(fillDataTypes, 100);
 
-    // map.on('click', function(e) {
-    //     console.log(e.coordinate);
-    // });
+    // map.on('click', (e) => console.log(e.coordinate));
 
     map.addInteraction(dragRotateInteraction);
     // map.addInteraction(drawInteraction);
@@ -31,7 +28,7 @@ function createMap(long, lat, locationGeoJSON, source) {
     map.addOverlay(popup);
 
     // create location option selection list
-    setTimeout(initLocations, 100, source);
+    initLocations(locationGeoJSON);
 }
 
 export default createMap;

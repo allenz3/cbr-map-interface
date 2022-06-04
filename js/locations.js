@@ -1,22 +1,30 @@
 import map from './view.js';
 import { bluePoint, whitePoint } from './styles.js';
-import { dataTypes, dataTypesAndLocations } from './data_types.js';
+import { dataTypesAndLocations } from './data_types.js';
 
 const locationsSet = new Set();
 const selectedLocationsSet = new Set();
 
 // fill set containing all locations
-function initLocations(source) {
+function initLocations(locationGeoJSON) {
     locationsSet.clear();
     selectedLocationsSet.clear();
-    Object.values(source).forEach(location => {
-        locationsSet.add(location)
+    // after the location features 
+    locationGeoJSON.getSource().on('featuresloadend', (evt) => {
+        const locations = evt.target.getFeatures();
+        locations.forEach(location => locationsSet.add(location));
+        initFillLocationsList();
     });
+}
+// https://stackoverflow.com/questions/72496965/is-there-any-way-to-access-the-locations-for-a-vector-layer-in-openlayers/72498213
+
+// fill sidebar with locations
+function initFillLocationsList() {
     locationsSet.forEach((location) => {
         const locationString = location.get("name") + " (" + location.get("proj") + ")";
         const newElem = document.createElement("option");
         newElem.innerHTML = locationString;
-        newElem.className = "location";  
+        newElem.className = "location";
         document.querySelector(".locationsList").appendChild(newElem);
     });
 }
@@ -26,7 +34,7 @@ const deselectAll = document.querySelector(".deselect-all").addEventListener("cl
     selectedLocationsSet.clear();
     fillSidebar(locationsSet, selectedLocationsSet);
     fillPoints(locationsSet, selectedLocationsSet);
-})
+});
 
 // search filter by keyword based on user input
 const search = document.querySelector(".search-filter").addEventListener("input", () => {
@@ -42,7 +50,7 @@ const search = document.querySelector(".search-filter").addEventListener("input"
             locationsList.appendChild(newElem);
         }
     });
-})
+});
 
 // if location option is clicked
 const locationsList = document.querySelector(".locationsList");
@@ -73,7 +81,7 @@ function findLocation(locationOption) { // argument: option element from locatio
 const overlayContainerElement = document.querySelector(".overlay-container");
 const overlayLayer = new ol.Overlay({
     element: overlayContainerElement
-})
+});
 map.addOverlay(overlayLayer);
 const overlayFeatureName = document.getElementById("feature-name");
 
@@ -140,8 +148,8 @@ function fillSidebar(locationsSet, selectedLocationsSet) {
             document.querySelector(".selectedLocationsList").appendChild(newElem);
         }
     });
-    console.log(locationsSet);
-    console.log(selectedLocationsSet);
+    // console.log(locationsSet);
+    // console.log(selectedLocationsSet);
 }
 
 // fills in the points on the map after a location option selection or a mouse click on a point
@@ -155,7 +163,7 @@ function fillPoints(locationsSet, selectedLocationsSet) {
     });
 }
 
-export default initLocations;
+export { initLocations };
 
 // https://youtu.be/RfMkdvN-23o
 // https://code-boxx.com/add-html-code-in-javascript/#:~:text=WAYS%20TO%20ADD%20HTML%20CODE%201%20METHOD%201%29,TAKE%20EXTRA%20NOTE%20OF%20THE%20LOADING%20ORDER%21%20
