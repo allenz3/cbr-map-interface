@@ -2,7 +2,7 @@ import map from './view.js';
 import { setCenterPoint } from './view.js';
 import baseLayerGroup from './base_layers.js';
 import rasterLayerGroup from './raster_layers.js';
-import { dragRotateInteraction, drawInteraction } from './interactions.js';
+import { dragRotateInteraction, drawInteraction, freehandDraw } from './interactions.js';
 import { popup } from './overlays.js';
 import { initLocations } from './locations.js';
 import { makeInventory } from './data_types.js';
@@ -29,6 +29,8 @@ function createMap(long, lat, locationGeoJSON) {
 
     // create location option selection list
     initLocations(locationGeoJSON);
+
+    // locationGeoJSON.getFeaturesInExtent(freehandDraw);
 }
 
 export default createMap;

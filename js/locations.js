@@ -1,6 +1,6 @@
 import map from './view.js';
 import { bluePoint, whitePoint } from './styles.js';
-import { dataTypesAndLocations } from './data_types.js';
+import { dataTypesAndLocations, locationsAndDataTypes } from './data_types.js';
 
 const locationsSet = new Set();
 const selectedLocationsSet = new Set();
@@ -29,9 +29,13 @@ function initFillLocationsList() {
     });
 }
 
-// search filter by keyword based on user input
+// deselect all locations from Selected Locations List
 const deselectAll = document.querySelector(".deselect-all").addEventListener("click", () => {
     selectedLocationsSet.clear();
+    const dataTypes = document.querySelectorAll("input[type='checkbox']");
+    dataTypes.forEach((dataType) => {
+        dataType.checked = false;
+    });
     fillSidebar(locationsSet, selectedLocationsSet);
     fillPoints(locationsSet, selectedLocationsSet);
 });
@@ -118,16 +122,33 @@ const pointClick = map.on("singleclick", point => {
 
 // if data type option is clicked
 const dataTypeSelector = document.querySelector(".data-type");
-dataTypeSelector.addEventListener("change", dataTypeSelected => findDataType(dataTypeSelected));
+dataTypeSelector.addEventListener("change", () => findDataType());
 // https://stackoverflow.com/questions/47058077/how-can-i-add-an-event-listener-to-a-select-element
 
 // if data type is selected
-function findDataType(dataTypeSelected) { // argument: option element from location list
+function findDataType() { // argument: option element from location list
     selectedLocationsSet.clear();
-    dataTypesAndLocations.get(dataTypeSelected.target.value).forEach((siteCode) => {
-        locationsSet.forEach((location) => {
-            if (siteCode === location.get("proj")) {
-                selectedLocationsSet.add(location);
+    const dataTypes = document.querySelectorAll("input[type='checkbox']");
+    const checkedDataTypes = new Set();
+    // OR
+    dataTypes.forEach((dataType) => {
+        if (dataType.checked) {
+            checkedDataTypes.add(dataType.value);
+            const currentLocationSet = dataTypesAndLocations.get(dataType.value);
+            currentLocationSet.forEach((siteCode) => {
+                locationsSet.forEach((location) => {
+                    if (siteCode === location.get("proj")) {
+                        selectedLocationsSet.add(location);
+                    }
+                });
+            });
+        }
+    });
+    // AND
+    selectedLocationsSet.forEach((location) => {
+        checkedDataTypes.forEach((dataType) => {
+            if (!locationsAndDataTypes.get(location.get("proj")).has(dataType)) {
+                selectedLocationsSet.delete(location);
             }
         });
     });
@@ -135,6 +156,10 @@ function findDataType(dataTypeSelected) { // argument: option element from locat
     fillPoints(locationsSet, selectedLocationsSet);
 }
 // https://stackoverflow.com/questions/17481098/how-to-get-the-selected-value-on-select-tag-using-javascript
+// https://www.w3schools.com/tags/tag_label.asp
+// https://stackoverflow.com/questions/17048273/checkbox-text-not-visible
+// https://stackoverflow.com/questions/14544104/checkbox-check-event-listener
+// https://www.skillsugar.com/how-to-check-if-a-checkbox-is-checked-in-javascript
 
 // fills the selected locations list sidebar after a location option selection or a mouse click on a point
 function fillSidebar(locationsSet, selectedLocationsSet) {

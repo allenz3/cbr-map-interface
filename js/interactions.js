@@ -7,15 +7,18 @@ const dragRotateInteraction = new ol.interaction.DragRotate({
 // draw coordinate polygons
 const drawInteraction = new ol.interaction.Draw({
     type: 'Polygon',
-    freehand: true
+    freehandCondition: ol.events.condition.shiftKeyOnly
 });
 
-drawInteraction.on('drawend', function(e) {
+// get features in extent?
+// also hide the blue point on the cursor tip, might want to disable the draw interaction unless the shift key is held down
+const freehandDraw = drawInteraction.on('drawend', function(e) {
     let parser = new ol.format.GeoJSON();
     let drawnFeatures = parser.writeFeaturesObject([e.feature]);
-    console.log(drawnFeatures.features[0].geometry.coordinates);
+    return drawnFeatures.features[0].geometry.coordinates;
 });
 
-export { dragRotateInteraction, drawInteraction };
+export { dragRotateInteraction, drawInteraction, freehandDraw };
 
+// https://openlayers.org/en/latest/apidoc/module-ol_interaction_Draw-Draw.html
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export
