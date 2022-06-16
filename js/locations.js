@@ -171,11 +171,19 @@ function fillSidebar(locationsSet, selectedLocationsSet) {
             newElem.innerHTML = location.get("name") + " (" + location.get("proj") + ")";
             newElem.className = "selectedLocations"; 
             document.querySelector(".selectedLocationsList").appendChild(newElem);
+            // Available Data Types at Last Selected Location
+            const dataTypesSet = locationsAndDataTypes.get(location.get("proj"));
+            if (dataTypesSet) {
+                document.querySelector(".available-data-types").innerHTML = location.get("name") + " (" + location.get("proj") + ")" + ": " + [...dataTypesSet].join(', ');
+            } else {
+                document.querySelector(".available-data-types").innerHTML = location.get("name") + " (" + location.get("proj") + ")" + ": " + "None";
+            }
         }
     });
     // console.log(locationsSet);
     // console.log(selectedLocationsSet);
 }
+// https://stackoverflow.com/questions/47243139/how-to-convert-set-to-string-with-space
 
 // fills in the points on the map after a location option selection or a mouse click on a point
 function fillPoints(locationsSet, selectedLocationsSet) {

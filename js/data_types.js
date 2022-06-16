@@ -2,6 +2,7 @@ const dataTypesAndLocations = new Map();
 const locationsAndDataTypes = new Map();
 const dataTypes = new Set();
 
+// make maps of data types to locations and locations to data types
 async function makeInventory() {
     const response = await fetch('./data/json/year_and_data_types.json');
     const inventory = await response.json();
