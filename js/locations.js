@@ -56,7 +56,7 @@ const search = document.querySelector(".search-filter").addEventListener("input"
     });
 });
 
-// if location option is clicked
+// if a location option is clicked
 const locationsList = document.querySelector(".locationsList");
 const selectedLocationsList = document.querySelector(".selectedLocationsList");
 locationsList.addEventListener("click", locationOption => findLocation(locationOption));
@@ -65,7 +65,7 @@ selectedLocationsList.addEventListener("click", locationOption => findLocation(l
 // if a location option is selected
 function findLocation(locationOption) { // argument: option element from location list
     // prevents event listener from selecting the select element (entire list)
-    if (locationOption.target.tagName === "OPTION" || locationOption.target.tagName === "LI") { // can also use e.target.className === "location"
+    if (locationOption.target.tagName === "OPTION" || locationOption.target.tagName === "LI") { // can also use locationOption.target.className === "location"
         locationsSet.forEach((location) => {
             const locationString = location.get("name") + " (" + location.get("proj") + ")";
             if (locationString === locationOption.target.innerText) {
@@ -128,13 +128,13 @@ dataTypeSelector.addEventListener("change", () => findDataType());
 // if data type is selected
 function findDataType() { // argument: option element from location list
     selectedLocationsSet.clear();
-    const dataTypes = document.querySelectorAll("input[type='checkbox']");
+    const dataTypesChecklist = document.querySelectorAll("input[type='checkbox']");
     const checkedDataTypes = new Set();
     // OR
-    dataTypes.forEach((dataType) => {
-        if (dataType.checked) {
-            checkedDataTypes.add(dataType.value);
-            const currentLocationSet = dataTypesAndLocations.get(dataType.value);
+    dataTypesChecklist.forEach((dataTypeCheckbox) => {
+        if (dataTypeCheckbox.checked) {
+            checkedDataTypes.add(dataTypeCheckbox.value);
+            const currentLocationSet = dataTypesAndLocations.get(dataTypeCheckbox.value);
             currentLocationSet.forEach((siteCode) => {
                 locationsSet.forEach((location) => {
                     if (siteCode === location.get("proj")) {
@@ -146,8 +146,8 @@ function findDataType() { // argument: option element from location list
     });
     // AND
     selectedLocationsSet.forEach((location) => {
-        checkedDataTypes.forEach((dataType) => {
-            if (!locationsAndDataTypes.get(location.get("proj")).has(dataType)) {
+        checkedDataTypes.forEach((dataTypeCheckbox) => {
+            if (!locationsAndDataTypes.get(location.get("proj")).has(dataTypeCheckbox)) {
                 selectedLocationsSet.delete(location);
             }
         });
@@ -171,15 +171,10 @@ function fillSidebar(locationsSet, selectedLocationsSet) {
             newElem.innerHTML = location.get("name") + " (" + location.get("proj") + ")";
             newElem.className = "selectedLocations"; 
             document.querySelector(".selectedLocationsList").appendChild(newElem);
-            // Available Data Types at Last Selected Location
-            const dataTypesSet = locationsAndDataTypes.get(location.get("proj"));
-            if (dataTypesSet) {
-                document.querySelector(".available-data-types").innerHTML = location.get("name") + " (" + location.get("proj") + ")" + ": " + [...dataTypesSet].join(', ');
-            } else {
-                document.querySelector(".available-data-types").innerHTML = location.get("name") + " (" + location.get("proj") + ")" + ": " + "None";
-            }
+            showDataTypes(location);
         }
     });
+    updateChecklist();
     // console.log(locationsSet);
     // console.log(selectedLocationsSet);
 }
@@ -195,6 +190,50 @@ function fillPoints(locationsSet, selectedLocationsSet) {
         }
     });
 }
+
+// Available Data Types at Last Selected Location
+function showDataTypes(location) {
+    const dataTypesSet = locationsAndDataTypes.get(location.get("proj"));
+    if (dataTypesSet) {
+        document.querySelector(".available-data-types").innerHTML = location.get("name") + " (" + location.get("proj") + ")" + ": " + [...dataTypesSet].join(', ');
+    } else {
+        document.querySelector(".available-data-types").innerHTML = location.get("name") + " (" + location.get("proj") + ")" + ": " + "None";
+    }
+}
+
+function updateChecklist() {
+    const checkedDataTypes = new Set();
+    let first = true;
+    // find AND conjunction of data types for all selected location points
+    selectedLocationsSet.forEach((location) => {
+        const currentDataTypesSet = locationsAndDataTypes.get(location.get("proj"));
+        if (first) {
+            if (currentDataTypesSet) {
+                currentDataTypesSet.forEach((dataType) => {
+                        checkedDataTypes.add(dataType)
+                });
+            }
+            first = false;
+        } else {
+            checkedDataTypes.forEach((dataType) => {
+                if (!currentDataTypesSet || !currentDataTypesSet.has(dataType)) {
+                    checkedDataTypes.delete(dataType);
+                }
+            });
+        }
+    });
+    // visually update checklist
+    const dataTypesChecklist = document.querySelectorAll("input[type='checkbox']");
+    dataTypesChecklist.forEach((dataTypeCheckbox) => {
+        if (checkedDataTypes.has(dataTypeCheckbox.value)) {
+            dataTypeCheckbox.checked = true;
+        } else {
+            dataTypeCheckbox.checked = false;
+        }
+    });
+}
+// https://stackoverflow.com/questions/21006557/how-to-do-something-only-to-the-first-item-within-a-loop-in-python
+// https://stackoverflow.com/questions/8206565/check-uncheck-checkbox-with-javascript
 
 export { initLocations };
 
