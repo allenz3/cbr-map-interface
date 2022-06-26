@@ -11,17 +11,11 @@
         <div class="grid-container">
             <div class="grid-1">
                 <div class="sidebar">
-                    <h2>Locations</h2>
-                    <input class="search-filter" type="text" placeholder="search here">
-                    <br></br>
-                    <select class="locationsList" multiple>
-                    </select>
-
-                    <h2>Selected Locations</h2>
-                    <p>(click on a location to deselect it)</p>
+                    <h2>Location Filters</h2>
+                    <p>Ctrl + left click to select multiple options</p>
                     <button class="deselect-all">Deselect All</button>
-                    <ul class="selectedLocationsList">
-                    </ul>
+                    <h2>Search</h2>
+                    <input class="search-filter" type="text" placeholder="search here">
 
                     <h2>Year</h2>
                     <select name="years" multiple>
@@ -34,15 +28,23 @@
                     </select>
 
                     <!-- https://stackoverflow.com/questions/8605516/default-select-option-as-blank -->
+                    <!-- https://html.com/attributes/select-multiple/#:~:text=How%20To%20Select%20Multiple%20Items%20In%20HTML%3A%20Easy,one%20option.%20...%203%20Browser%20Support%20for%20multiple -->
                     <h2>Data Types</h2>
-                    <p>Checked boxes represent data types found in every highlighted location</p>
-                    <div class="data-type">
-                    </div>
+                    <select class="data-types" multiple size="12">
+                    </select>
 
-                    <h2>Available Data Types at Last Selected Location</h2>
-                    <div class="available-data-types">
-                    </div>
-                    
+                    <h2>Available Locations List</h2>
+                    <select class="locationsList" multiple>
+                    </select>
+
+                    <h2>Selected Locations</h2>
+                    <p>Click on a location to deselect it</p>
+                    <ul class="selectedLocationsList">
+                    </ul>
+
+                    <br>
+                    <button>Submit Query</button>
+
                     <!-- https://www.w3schools.com/tags/tag_select.asp -->
                     <h2>Base Layers</h2>
                     <select name="base_layers">

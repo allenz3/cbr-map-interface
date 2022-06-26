@@ -19,30 +19,21 @@ async function makeInventory() {
             locationsAndDataTypes.get(siteCode).add(param);
         });
     });
-    fillDataTypes();
+    initFillDataTypes();
 }
 
-// fill checklist menu with data types
-function fillDataTypes() {
+function initFillDataTypes() {
+    const dataTypesList = document.querySelector(".data-types");
+    dataTypesList.innerHTML = "";
     dataTypes.forEach((dataType) => {
-        const container = document.createElement("div");
-
-        const checkbox = document.createElement("input");
-        checkbox.setAttribute("type", "checkbox");
-        checkbox.id = dataType;
-        checkbox.setAttribute("value", dataType);
-
-        const label = document.createElement("label");
-        label.setAttribute("for", "dataType");
-        label.innerHTML = dataType;
-
-        container.appendChild(checkbox);
-        container.appendChild(label);
-        document.querySelector(".data-type").appendChild(container);
+        const newElem = document.createElement("option");
+        newElem.innerHTML = dataType;
+        //newElem.className = "location";
+        document.querySelector(".data-types").appendChild(newElem);
     });
 }
 
-export { makeInventory, dataTypesAndLocations, locationsAndDataTypes };
+export { makeInventory, initFillDataTypes, dataTypesAndLocations, locationsAndDataTypes };
 
 // https://youtu.be/uxf0--uiX0I
 // https://www.w3schools.com/js/js_maps.asp

@@ -6,6 +6,7 @@ import { dragRotateInteraction, drawInteraction, freehandDraw } from './interact
 import { popup } from './overlays.js';
 import { initLocations } from './locations.js';
 import { makeInventory } from './data_types.js';
+import { search } from './filters.js'
 // https://youtu.be/cRHQNNcYf6s
 
 function createMap(long, lat, locationGeoJSON) {
