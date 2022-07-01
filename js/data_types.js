@@ -1,6 +1,8 @@
-const dataTypesAndLocations = new Map();
-const locationsAndDataTypes = new Map();
+const dataTypesMap = new Map();
+const locationsMap = new Map();
+const yearsMap = new Map();
 const dataTypes = new Set();
+const years = new Set();
 
 // make maps of data types to locations and locations to data types
 async function makeInventory() {
@@ -10,29 +12,58 @@ async function makeInventory() {
         if (siteData["onlineData"] === "1") {
             const siteCode = siteData["siteCode"];
             const dataTypeName = siteData["onlineNames"];
-            if (!locationsAndDataTypes.has(siteCode)) locationsAndDataTypes.set(siteCode, new Set());
-            if (!dataTypesAndLocations.has(dataTypeName)) {
+            const year = siteData["year"];
+            // alphabetical order
+            if (!dataTypesMap.has(dataTypeName)) {
                 dataTypes.add(dataTypeName);
-                dataTypesAndLocations.set(dataTypeName, new Set());
+                dataTypesMap.set(dataTypeName, new Array(new Set(), new Set()));
             }
-            dataTypesAndLocations.get(dataTypeName).add(siteCode);
-            locationsAndDataTypes.get(siteCode).add(dataTypeName);
+            if (!locationsMap.has(siteCode)) {
+                locationsMap.set(siteCode, new Array(new Set(), new Set()));
+            }
+            if (!yearsMap.has(year)) {
+                years.add(year);
+                yearsMap.set(year, new Array(new Set(), new Set()));
+            }
+            // data type -> location
+            dataTypesMap.get(dataTypeName)[0].add(siteCode);
+            // data type -> year
+            dataTypesMap.get(dataTypeName)[1].add(year);
+            // location -> data type
+            locationsMap.get(siteCode)[0].add(dataTypeName);
+            // location -> year
+            locationsMap.get(siteCode)[1].add(year);
+            // year -> data type
+            yearsMap.get(year)[0].add(dataTypeName);
+            // year -> location
+            yearsMap.get(year)[1].add(siteCode);
         }
     });
     initFillDataTypes();
+    initFillYears();
 }
 
 function initFillDataTypes() {
-    const dataTypesList = document.querySelector(".data-types");
+    const dataTypesList = document.querySelector(".data-types-list");
     dataTypesList.innerHTML = "";
     dataTypes.forEach((dataType) => {
         const newElem = document.createElement("option");
         newElem.innerHTML = dataType;
-        document.querySelector(".data-types").appendChild(newElem);
+        dataTypesList.appendChild(newElem);
     });
 }
 
-export { makeInventory, initFillDataTypes, dataTypesAndLocations, locationsAndDataTypes };
+function initFillYears() {
+    const yearsList = document.querySelector(".years-list");
+    yearsList.innerHTML = "";
+    years.forEach((year) => {
+        const newElem = document.createElement("option");
+        newElem.innerHTML = year;
+        yearsList.appendChild(newElem);
+    });
+}
+
+export { makeInventory, initFillDataTypes, initFillYears, dataTypesMap, locationsMap, yearsMap };
 
 // https://youtu.be/uxf0--uiX0I
 // https://www.w3schools.com/js/js_maps.asp

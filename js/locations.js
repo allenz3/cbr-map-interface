@@ -1,6 +1,6 @@
 import map from './view.js';
 import { bluePoint, whitePoint } from './styles.js';
-import { initFillDataTypes, dataTypesAndLocations, locationsAndDataTypes } from './data_types.js';
+import { initFillDataTypes, initFillYears } from './data_types.js';
 
 const locationsSet = new Set();
 const selectedLocationsSet = new Set();
@@ -20,14 +20,14 @@ function initLocations(locationGeoJSON) {
 
 // fill sidebar with locations
 function initFillLocationsList() {
-    const locationsList = document.querySelector(".locationsList");
+    const locationsList = document.querySelector(".locations-list");
     locationsList.innerHTML = "";
     locationsSet.forEach((location) => {
         const locationString = location.get("name") + " (" + location.get("proj") + ")";
         const newElem = document.createElement("option");
         newElem.innerHTML = locationString;
         newElem.className = "location";
-        document.querySelector(".locationsList").appendChild(newElem);
+        document.querySelector(".locations-list").appendChild(newElem);
     });
 }
 
@@ -38,10 +38,11 @@ const deselectAll = document.querySelector(".deselect-all").addEventListener("cl
     fillPoints(locationsSet, selectedLocationsSet);
     initFillLocationsList();
     initFillDataTypes();
+    initFillYears();
 });
 
 // if a location option is clicked
-const locationsList = document.querySelector(".locationsList");
+const locationsList = document.querySelector(".locations-list");
 const selectedLocationsList = document.querySelector(".selectedLocationsList");
 locationsList.addEventListener("click", locationOption => findLocation(locationOption));
 selectedLocationsList.addEventListener("click", locationOption => findLocation(locationOption));
