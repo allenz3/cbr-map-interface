@@ -31,8 +31,12 @@ const filterByDataType = document.querySelector(".data-types-list").addEventList
 
 // user clicks on a location, data types and years are filtered
 const filterByLocation = document.querySelector(".locations-list").addEventListener('change', function(e) {
-    const partsArray = e.target.value.split('(');
-    const siteCode = partsArray[partsArray.length - 1].substring(0, partsArray[partsArray.length - 1].length - 1);
+    let siteCode = ""; 
+    locationsSet.forEach((location) => {
+        if (location.get("name") + " (" + location.get("proj") + ")" == document.querySelector(".locations-list").value) {
+            siteCode = location.get("proj");
+        }
+    });
     if (locationsMap.get(siteCode)) {
         const currentDataTypesSet = locationsMap.get(siteCode)[0];
         addDataTypeOptions(currentDataTypesSet);
@@ -40,7 +44,6 @@ const filterByLocation = document.querySelector(".locations-list").addEventListe
         addYearOptions(currentYearsSet);
     }
 });
-// https://stackoverflow.com/questions/1216505/how-to-parse-a-string-in-javascript
 
 // user clicks on a location point, data types and years are filtered
 const filterByLocationPoint = map.on("singleclick", point => {

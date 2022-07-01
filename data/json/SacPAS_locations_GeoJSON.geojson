@@ -82,7 +82,7 @@
       "type": "Feature",
       "properties": {
         "proj": "NAT",
-        "name": "LAKE NATOMA  (NIMBUS DAM)",
+        "name": "LAKE NATOMA (NIMBUS DAM)",
         "basin": "AMERICAN R",
         "lat": "38.65",
         "lon": "-121.183"
@@ -777,7 +777,7 @@
       "type": "Feature",
       "properties": {
         "proj": "SHA",
-        "name": "SHASTA DAM  (USBR)",
+        "name": "SHASTA DAM (USBR)",
         "basin": "SACRAMENTO R",
         "lat": "40.718",
         "lon": "-122.42"

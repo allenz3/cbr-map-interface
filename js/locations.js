@@ -31,8 +31,8 @@ function initFillLocationsList() {
     });
 }
 
-// deselect all locations from Selected Locations List
-const deselectAll = document.querySelector(".deselect-all").addEventListener("click", () => {
+// reset sidebar and map interface
+const reset = document.querySelector(".reset").addEventListener("click", () => {
     selectedLocationsSet.clear();
     fillSidebar(locationsSet, selectedLocationsSet);
     fillPoints(locationsSet, selectedLocationsSet);
@@ -43,9 +43,7 @@ const deselectAll = document.querySelector(".deselect-all").addEventListener("cl
 
 // if a location option is clicked
 const locationsList = document.querySelector(".locations-list");
-const selectedLocationsList = document.querySelector(".selectedLocationsList");
 locationsList.addEventListener("click", locationOption => findLocation(locationOption));
-selectedLocationsList.addEventListener("click", locationOption => findLocation(locationOption));
 
 // if a location option is selected
 function findLocation(locationOption) { // argument: option element from location list
@@ -83,18 +81,20 @@ const pointClick = map.on("singleclick", point => {
 
 // fills the selected locations list sidebar after a location option selection or a mouse click on a point
 function fillSidebar(locationsSet, selectedLocationsSet) {
-    const selectedLocationsList = document.querySelector(".selectedLocationsList");
-    selectedLocationsList.innerHTML = "";
+    const locationsList = document.querySelector(".locations-list");
+    const selectedLocationsSetText = new Set();
     selectedLocationsSet.forEach((location) => {
-        if (selectedLocationsSet.has(location)) { // if location is selected put it in the sidebar
-            const newElem = document.createElement("li");
-            newElem.innerHTML = location.get("name") + " (" + location.get("proj") + ")";
-            newElem.className = "selectedLocations"; 
-            document.querySelector(".selectedLocationsList").appendChild(newElem);
-        }
-    });
+        selectedLocationsSetText.add(location.get("name") + " (" + location.get("proj") + ")");
+    })
+    for (let i = 0; i < locationsList.length; i++) {
+        const locationOption = locationsList[i];
+        if (selectedLocationsSetText.has(locationOption.value)) locationOption.selected = true;
+        else locationOption.selected = false;
+    }
 }
-// https://stackoverflow.com/questions/47243139/how-to-convert-set-to-string-with-space
+// https://stackoverflow.com/questions/10911526/how-do-i-programatically-select-an-html-option-using-javascript
+// https://stackoverflow.com/questions/21343216/javascript-loop-through-all-html-select-option
+// https://www.w3schools.com/tags/tag_option.asp
 
 // fills in the points on the map after a location option selection or a mouse click on a point
 function fillPoints(locationsSet, selectedLocationsSet) {

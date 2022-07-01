@@ -37,18 +37,6 @@ body {
     bottom: 21%;
 }
 
-/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
-https://www.w3schools.com/CSSref/pr_list-style-type.asp */
-li.selectedLocations {
-    list-style-type: '−';
-    padding: 0.5rem;
-    margin-right: 1rem;
-}
-
-li.selectedLocations:hover {
-    background-color: gainsboro;
-}
-
 .overlay-text {
     background-color: whitesmoke;
     padding: 1px 6px;
