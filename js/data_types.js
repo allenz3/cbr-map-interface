@@ -56,9 +56,14 @@ function initFillDataTypes() {
 function initFillYears() {
     const yearsList = document.querySelector(".years-list");
     yearsList.innerHTML = "";
+    const sortedYears = new Array();
     years.forEach((year) => {
+        sortedYears.push(year);
+    })
+    sortedYears.sort().reverse();
+    sortedYears.forEach((sortedYear) => {
         const newElem = document.createElement("option");
-        newElem.innerHTML = year;
+        newElem.innerHTML = sortedYear;
         yearsList.appendChild(newElem);
     });
 }
