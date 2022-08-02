@@ -8,15 +8,11 @@
         <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
-        <div class="grid-container">
-            <div class="grid-1">
+        <div class="flex-container">
+            <div class="flex-1">
                 <div class="sidebar">
                     <!-- https://stackoverflow.com/questions/8605516/default-select-option-as-blank -->
                     <!-- https://html.com/attributes/select-multiple/#:~:text=How%20To%20Select%20Multiple%20Items%20In%20HTML%3A%20Easy,one%20option.%20...%203%20Browser%20Support%20for%20multiple -->
-                    <h2>Data Types</h2>
-                    <select class="data-types-list" multiple size="12">
-                    </select>
-
                     <h2>Locations</h2>
                     <select class="locations-list" multiple size="12">
                     </select>
@@ -24,14 +20,15 @@
                     <br>
                     <input class="search-filter" type="text" placeholder="search here">
                     
+                    <h2>Data Types</h2>
+                    <select class="data-types-list" multiple size="12">
+                    </select>
+
                     <h2>Year</h2>
                     <select class="years-list" multiple size="6">
                     </select>
                     
-                    <br>
-                    <button>Submit Query</button>
-
-                    <br>
+                    <button class="submit-query">Submit Query</button>
                     <button class="reset">Reset</button>
 
                     <!-- https://www.w3schools.com/tags/tag_select.asp -->
@@ -57,9 +54,13 @@
                     </select>
                 </div>
             </div>
-            <div class="grid-2">
+            <div class="flex-2">
                 <div id='js-map' class='map'>
                     <p id='popup-coordinates'></p>
+                </div>
+
+                <h2>URL Generated</h2>
+                <div class="url-generated">
                 </div>
             </div>
         </div>

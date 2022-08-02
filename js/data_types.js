@@ -1,7 +1,7 @@
 const dataTypesMap = new Map();
 const locationsMap = new Map();
 const yearsMap = new Map();
-const dataTypes = new Set();
+let dataTypes = new Array();
 const years = new Set();
 
 // make maps of data types to locations and locations to data types
@@ -15,7 +15,7 @@ async function makeInventory() {
             const year = siteData["year"];
             // alphabetical order
             if (!dataTypesMap.has(dataTypeName)) {
-                dataTypes.add(dataTypeName);
+                dataTypes.push(dataTypeName);
                 dataTypesMap.set(dataTypeName, new Array(new Set(), new Set()));
             }
             if (!locationsMap.has(siteCode)) {
@@ -46,6 +46,7 @@ async function makeInventory() {
 function initFillDataTypes() {
     const dataTypesList = document.querySelector(".data-types-list");
     dataTypesList.innerHTML = "";
+    dataTypes.sort();
     dataTypes.forEach((dataType) => {
         const newElem = document.createElement("option");
         newElem.innerHTML = dataType;
@@ -54,18 +55,25 @@ function initFillDataTypes() {
 }
 
 function initFillYears() {
+    // const yearsList = document.querySelector(".years-list");
+    // yearsList.innerHTML = "";
+    // const sortedYears = new Array();
+    // years.forEach((year) => {
+    //     sortedYears.push(year);
+    // })
+    // sortedYears.sort().reverse();
+    // sortedYears.forEach((sortedYear) => {
+    //     const newElem = document.createElement("option");
+    //     newElem.innerHTML = sortedYear;
+    //     yearsList.appendChild(newElem);
+    // });
     const yearsList = document.querySelector(".years-list");
     yearsList.innerHTML = "";
-    const sortedYears = new Array();
-    years.forEach((year) => {
-        sortedYears.push(year);
-    })
-    sortedYears.sort().reverse();
-    sortedYears.forEach((sortedYear) => {
+    for (let i = 2022; i >= 1945; i--) {
         const newElem = document.createElement("option");
-        newElem.innerHTML = sortedYear;
+        newElem.innerHTML = i;
         yearsList.appendChild(newElem);
-    });
+    }
 }
 
 export { makeInventory, initFillDataTypes, initFillYears, dataTypesMap, locationsMap, yearsMap };

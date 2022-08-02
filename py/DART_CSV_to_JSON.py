@@ -7,7 +7,7 @@ import json
 
 os.chdir("../OpenLayers_Demo")
 
-with open('./data/csv/CB_river_stations_latlong.csv', 'r') as locations:
+with open('./data/csv/Site_Lat_Long.csv', 'r') as locations:
     csv_reader = csv.reader(locations)
 
     next(csv_reader)
@@ -24,10 +24,10 @@ with open('./data/csv/CB_river_stations_latlong.csv', 'r') as locations:
         for line in csv_reader: 
             location = {
                 "type": "Feature",
-                "properties": {"proj": line[0], "name": line[1], "lat": line[2], "lon": line[3]},
+                "properties": {"proj": line[0], "lat": line[1], "lon": line[2], "name": line[3]},
                 "geometry": {
                     "type": "Point",
-                    "coordinates": [line[3], line[2]]
+                    "coordinates": [line[2], line[1]]
                 }
             }
             locations["features"].append(location)

@@ -17,24 +17,55 @@ body {
     margin: 2rem;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: 30vw 70vw;
-    grid-template-rows: 100vh;
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 2rem;
+    margin: 2rem;
+}
+/* https://stackoverflow.com/questions/48601246/how-to-set-a-specific-flexbox-gap-in-css */
+
+.flex-1 {
 }
 
 .sidebar {
-    margin-top: 2rem;
-    margin-left: 2rem;
+    padding-bottom: 2rem;
+}
+
+h2:first-child {
+    margin-top: 0;
+}
+/* https://www.w3schools.com/cssref/sel_firstchild.asp */
+
+h2 {
+    margin-right: 1rem;
+}
+
+select {
+    width: 100%;
+}
+
+.search-filter {
+    width: 100%;
+}
+
+button {
+    display: inline;
+    margin-top: 1rem;
+}
+
+.flex-2 {
+    width: 90%;
+    align-items: flex-start;
 }
 
 .map {
-    width: 80vw;
+    border-style: solid;
     height: 100vh;
 }
 
 .ol-scale-line {
-    bottom: 21%;
+    bottom: 23%;
 }
 
 .overlay-text {
@@ -42,3 +73,11 @@ body {
     padding: 1px 6px;
     border: 1px solid black;
 }
+
+.url-generated {
+    word-break: break-all;
+}
+/* https://youtu.be/5VP-vJDyoWU
+https://www.w3schools.com/cssref/css3_pr_word-wrap.asp
+https://css-tricks.com/almanac/properties/o/overflow-wrap/
+*/

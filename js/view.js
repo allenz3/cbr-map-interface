@@ -8,7 +8,7 @@ const map = new ol.Map({
         // center: ol.proj.transform([-120.740135, 42.751076], 'EPSG:4326', 'EPSG:3857'),
         // center: [-13500000, 5000000],
         center: [0, 0],
-        zoom: 7,
+        zoom: 6,
         maxZoom: 16,
         minZoom: 6,
         extent: [-14500000,3500000,-12000000,6500000]

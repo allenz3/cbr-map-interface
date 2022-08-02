@@ -7,7 +7,7 @@ import json
 
 os.chdir("../OpenLayers_Demo")
 
-with open('./data/csv/CV_SacPAS_Proj_LatLon.csv', 'r') as locations:
+with open('./data/csv/CV_SacPAS_Proj_LatLon_updated22-07-12.csv', 'r') as locations:
     csv_reader = csv.reader(locations)
 
     next(csv_reader)
@@ -21,16 +21,17 @@ with open('./data/csv/CV_SacPAS_Proj_LatLon.csv', 'r') as locations:
             ]
         }
 
-        for line in csv_reader: 
-            location = {
-                "type": "Feature",
-                "properties": {"proj": line[0], "name": line[1], "basin": line[2], "lat": line[3], "lon": line[4]},
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [line[4], line[3]]
+        for line in csv_reader:
+            if line[5] == "1":
+                location = {
+                    "type": "Feature",
+                    "properties": {"proj": line[0], "name": line[1], "basin": line[2], "lat": line[3], "lon": line[4]},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [line[4], line[3]]
+                    }
                 }
-            }
-            locations["features"].append(location)
+                locations["features"].append(location)
         
         json.dump(locations, new_file)
 
