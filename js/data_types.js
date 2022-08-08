@@ -1,3 +1,7 @@
+/*
+Stored in alphabetical order
+*/
+
 const dataTypesMap = new Map();
 const locationsMap = new Map();
 const yearsMap = new Map();
@@ -5,8 +9,8 @@ let dataTypes = new Array();
 const years = new Set();
 
 // make maps of data types to locations and locations to data types
-async function makeInventory() {
-    const response = await fetch('./data/json/year_and_data_types_JLGedits.json');
+async function makeDataTypesInventory(dataTypesJSON) {
+    const response = await fetch(dataTypesJSON);
     const inventory = await response.json();
     inventory["river_data"].forEach((siteData) => {
         if (siteData["onlineData"] === "1") {
@@ -76,7 +80,7 @@ function initFillYears() {
     }
 }
 
-export { makeInventory, initFillDataTypes, initFillYears, dataTypesMap, locationsMap, yearsMap };
+export { makeDataTypesInventory, initFillDataTypes, initFillYears, dataTypesMap, locationsMap, yearsMap };
 
 // https://youtu.be/uxf0--uiX0I
 // https://www.w3schools.com/js/js_maps.asp

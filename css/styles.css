@@ -32,13 +32,20 @@ body {
     padding-bottom: 2rem;
 }
 
-h2:first-child {
+.heading {
     margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
 }
 /* https://www.w3schools.com/cssref/sel_firstchild.asp */
 
 h2 {
     margin-right: 1rem;
+}
+
+h3 {
+    margin-top: 0;
+    padding-top: 0;
 }
 
 select {
@@ -56,16 +63,16 @@ button {
 
 .flex-2 {
     width: 90%;
-    align-items: flex-start;
 }
 
 .map {
     border-style: solid;
-    height: 100vh;
+    height: 70%;
 }
 
 .ol-scale-line {
-    bottom: 23%;
+    margin-left: 20%;
+    bottom: 1%;
 }
 
 .overlay-text {
@@ -81,3 +88,7 @@ button {
 https://www.w3schools.com/cssref/css3_pr_word-wrap.asp
 https://css-tricks.com/almanac/properties/o/overflow-wrap/
 */
+
+.layers {
+    margin-top: 5rem;
+}

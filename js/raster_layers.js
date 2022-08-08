@@ -1,15 +1,5 @@
 // Raster Layers
-const tileArcGISLayer = new ol.layer.Tile ({ // ArcGIS
-    source: new ol.source.TileArcGISRest({
-        url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer',
-        attributions: '(c) ESRI and its data partners'
-        // https://sampleserver1.arcgisonline.com/ArcGIS/rest/services
-    }),
-    visible: false,
-    title: 'TileArcGISLayer'
-});
-
-const tileArcGISLayer2 = new ol.layer.Tile ({ // ArcGIS
+const streamsLayer = new ol.layer.Tile ({ // ArcGIS
     source: new ol.source.TileArcGISRest({
         url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSHydroCached/MapServer',
         //sublayers: [{
@@ -18,19 +8,7 @@ const tileArcGISLayer2 = new ol.layer.Tile ({ // ArcGIS
         attributions: '(c) ESRI and its data partners' 
     }),
     visible: false,
-    title: 'TileArcGISLayer2'
-});
-
-const tileArcGISLayer3 = new ol.layer.Tile ({ // ArcGIS
-    source: new ol.source.TileArcGISRest({
-        url: 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/WaterTemplate/LocalGovernmentInfrastructureBasemap/MapServer',
-        sublayers: [{
-            id: 7
-        }],
-        attributions: '(c) ESRI and its data partners' 
-    }),
-    visible: false,
-    title: 'TileArcGISLayer3'
+    title: 'StreamsLayer'
 });
 
 const NOAAWMSLayer = new ol.layer.Tile ({ // NOAA WMS Layer
@@ -46,31 +24,18 @@ const NOAAWMSLayer = new ol.layer.Tile ({ // NOAA WMS Layer
     visible: false,
     title: 'NOAAWMSLayer'
 });
-// map.addLayer(NOAAWMSLayer);
-// NOAAWMSLayer.getSource().setAttributions('<a href=https://nowcoast.noaa.gov/>© NOAA<a/>');
-// NOAAWMSLayer.set('maxZoom', 5);
 
-const tileDebugLayer = new ol.layer.Tile({ // Tile Debug
-    source: new ol.source.TileDebug(),
-    visible: false,
-    title: 'TileDebugLayer'
-});
-
-// Static Image OpenStreetMap Humanitarian
-const openStreetMapFragmentStatic = new ol.layer.Image({
-    source: new ol.source.ImageStatic({
-        url: './data/png/OpenLayers_Static_Humanitarian.png',
-        imageExtent: [4991698.9328313675, 5050292.393744084, 10008191.828130603, 10013417.911357462],
-        attributions: '<a href=https://www.openstreetmap.org/copyright/>© OpenStreetMap contributors<a/>'
-    }),
-    visible: false,
-    title: 'openStreetMapFragmentStatic'
-});
+// Tile Debug Layer, useful for development purposes
+// const tileDebugLayer = new ol.layer.Tile({ 
+//     source: new ol.source.TileDebug(),
+//     visible: false,
+//     title: 'TileDebugLayer'
+// });
 
 // Raster Layer Group
 const rasterLayerGroup = new ol.layer.Group({
     layers: [
-        tileArcGISLayer, tileArcGISLayer2, tileArcGISLayer3, NOAAWMSLayer, tileDebugLayer, openStreetMapFragmentStatic
+        streamsLayer, NOAAWMSLayer
     ]
 });
 

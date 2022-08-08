@@ -1,3 +1,7 @@
+/* Various filters used to create specific search queries.
+NOTE: The year filter is disabled for the time being and is currently a static list.
+*/
+
 import map from './view.js';
 import { dataTypesMap, locationsMap, yearsMap } from './data_types.js';
 import { locationsSet, initFillLocationsList, initLocations } from './locations.js'
@@ -22,29 +26,28 @@ const search = document.querySelector(".search-filter").addEventListener("input"
 });
 
 // user clicks on a data type, locations and years and filtered
+// Note: only data types are filtered for now
 const dataTypesList = document.querySelector(".data-types-list");
 const filterByDataType = dataTypesList.addEventListener("click", function(e) {
     if (e.target.tagName === "OPTION") {
         // select multiple data types
         selectMultiple(selectedDataTypes, dataTypesList.value, dataTypesList);
         // fill locations
-        const currentSiteCodesSet = dataTypesMap.get(e.target.innerHTML)[0];
-        inCommon(currentSiteCodesSet, dataTypesMap, selectedDataTypes, 0);
-        const currentLocationsSet = new Set();
-        locationsSet.forEach((location) => {
-            if (currentSiteCodesSet.has(location.get("proj"))) currentLocationsSet.add(location);
-        });
-        // if no options are selected, then reset other filters
+        let filteredSiteCodesSet = new Set();
         let resetList = true;
-        for (let i = 0; i < dataTypesList.length; i++) {
-            const dataTypeOption = dataTypesList[i];
-            if (dataTypeOption.selected) {
-                resetList = false;
-                break;
-            };
+        if (selectedDataTypes.size === 0) {
+            initFillLocationsList();
+        } else if (selectedDataTypes.size === 1) {
+            filteredSiteCodesSet = new Set(dataTypesMap.get(dataTypesList.value)[0]);
+            addLocationOptions(filteredSiteCodesSet);
+        } else {
+            filteredSiteCodesSet = new Set(dataTypesMap.get(dataTypesList.value)[0]);
+            selectedDataTypes.forEach((dataType) => {
+                const newLocationsSet = new Set(dataTypesMap.get(dataType)[0]);
+                inCommon(filteredSiteCodesSet, newLocationsSet);
+            });
+            addLocationOptions(filteredSiteCodesSet);
         }
-        if (resetList) initFillLocationsList();
-        else addLocationOptions(currentLocationsSet);
         // fill years
         // const currentYearsSet = dataTypesMap.get(e.target.innerHTML)[1];
         // inCommon(currentYearsSet, dataTypesMap, selectedDataTypes, 1);
@@ -56,14 +59,8 @@ const filterByDataType = dataTypesList.addEventListener("click", function(e) {
 // Note: only data types are filtered for now
 const locationsList = document.querySelector(".locations-list")
 const filterByLocation = locationsList.addEventListener('click', (e) => {
-        if (e.target.tagName === "OPTION") {
-            let siteCode = "";
-            locationsSet.forEach((location) => {
-            if (location.get("name") + " (" + location.get("proj") + ")" == locationsList.value) {
-                siteCode = location.get("proj");
-            }
-        });
-        locationSelected(siteCode);
+    if (e.target.tagName === "OPTION") {
+        locationSelected(locationsList.value);
     }
 });
 
@@ -72,36 +69,40 @@ const filterByLocation = locationsList.addEventListener('click', (e) => {
 const filterByLocationPoint = map.on("singleclick", point => {
     map.forEachFeatureAtPixel(point.pixel, point => {
         if (point.getGeometry().getType() === 'Point') {
-            locationSelected(point.get("proj"));
+            locationSelected(point.get("name") + " (" + point.get("proj") + ")");
         }
     });
 });
 
-function locationSelected(siteCode) {
-    // select multiple data types
-    selectMultiple(selectedLocations, siteCode, locationsList);
+function locationSelected(locationString) {
     try {
+        // select multiple data types
+        selectMultiple(selectedLocations, locationString, locationsList);
         // fill data types
-        const currentDataTypesSet = locationsMap.get(siteCode)[0];
-        inCommon(currentDataTypesSet, locationsMap, selectedLocations, 0);
+        let filteredDataTypesSet = new Set();
+        let resetList = true;
+        const currentSiteCode = locationStringToSiteCode(locationsList.value);
+        if (selectedLocations.size === 0) {
+            initFillDataTypes();
+        } else if (selectedLocations.size === 1) {
+            filteredDataTypesSet = new Set(locationsMap.get(currentSiteCode)[0]);
+            addDataTypeOptions(filteredDataTypesSet);
+        } else {
+            filteredDataTypesSet = new Set(locationsMap.get(currentSiteCode)[0]);
+            selectedLocations.forEach((locationString) => {
+                const newSiteCode = locationStringToSiteCode(locationString);
+                const newDataTypesSet = new Set(locationsMap.get(newSiteCode)[0]);
+                inCommon(filteredDataTypesSet, newDataTypesSet);
+            });
+            addDataTypeOptions(filteredDataTypesSet);
+        }
         // fill years
         // const currentYearsSet = locationsMap.get(siteCode)[1];
         // inCommon(currentYearsSet, locationsMap, selectedLocations, 1);
         // addYearOptions(currentYearsSet);
-        // update sidebar locations and map location points
-        fillSidebar(locationsSet, selectedLocations);
+        // update map location points
         fillPoints(locationsSet, selectedLocations);
         // if no options are selected, then reset other filters
-        let resetList = true;
-        for (let i = 0; i < locationsList.length; i++) {
-            const locationOption = locationsList[i];
-            if (locationOption.selected) {
-                resetList = false;
-                break;
-            };
-        }
-        if (resetList) initFillDataTypes();
-        else addDataTypeOptions(currentDataTypesSet);
     } catch (TypeError) {
         console.error("There are no relevant data types or years at the current location.");
     }
@@ -128,6 +129,7 @@ const filterByYear = yearsList.addEventListener("click", function(e) {
     }
 });
 
+// allows multiple options to be selected at once
 function selectMultiple(selectedSet, value, list) {
     if (!selectedSet.has(value)) selectedSet.add(value);
     else selectedSet.delete(value);
@@ -139,27 +141,19 @@ function selectMultiple(selectedSet, value, list) {
 }
 
 // AND logic enforcement
-function inCommon(currentSet, currentMap, selectedSet, index) {
+function inCommon(currentSet, newSet) {
     currentSet.forEach((value) => {
-        selectedSet.forEach((key) => {
-            const newSet = currentMap.get(key)[index];
-            if (!newSet.has(value)) currentSet.delete(value);
-        });
+        if (!newSet.has(value)) currentSet.delete(value);
     })
 }
 
+//
 function fillSidebar(locationSet, selectedLocations) {
     const locationsList = document.querySelector(".locations-list");
-    selectedLocations.forEach((siteCode) => {
-        let locationString = "";
-        locationsSet.forEach((location) => {
-            if (siteCode == location.get("proj")) {
-                locationString = location.get("name") + " (" + location.get("proj") + ")";
-            }
-        });
+    selectedLocations.forEach((locationString) => {
         for (let i = 0; i < locationsList.length; i++) {
             const locationOption = locationsList[i];
-            if (locationString == locationOption.value) locationOption.selected = true;
+            if (locationString === locationOption.value) locationOption.selected = true;
         }
     });
 }
@@ -167,7 +161,7 @@ function fillSidebar(locationSet, selectedLocations) {
 
 function fillPoints(locationsSet, selectedLocations) {
     locationsSet.forEach((location) => {
-        if (selectedLocations.has(location.get("proj"))) location.setStyle(bluePoint);
+        if (selectedLocations.has(location.get("name") + " (" + location.get("proj") + ")")) location.setStyle(bluePoint);
         else location.setStyle(whitePoint);
     });
 }
@@ -192,7 +186,8 @@ function addDataTypeOptions(currentDataTypesSet) {
     }
 }
 
-function addLocationOptions(currentLocationsSet) {
+function addLocationOptions(currentSiteCodesSet) {
+    // save selected locations
     const locationsList = document.querySelector(".locations-list");
     const currentSelectedLocations = new Set();
     for (let i = 0; i < locationsList.length; i++) {
@@ -201,9 +196,16 @@ function addLocationOptions(currentLocationsSet) {
             currentSelectedLocations.add(option.innerHTML);
         }
     }
+    const currentLocationsStringSet = new Set();
+    // convert site codes to locations
+    locationsSet.forEach((location) => {
+        if (currentSiteCodesSet.has(location.get("proj"))) {
+            currentLocationsStringSet.add(location.get("name") + " (" + location.get("proj") + ")");
+        }
+    })
+    // fill locations selection box
     locationsList.innerHTML = "";
-    currentLocationsSet.forEach((location) => {
-        const locationString = location.get("name") + " (" + location.get("proj") + ")";
+    currentLocationsStringSet.forEach((locationString) => {
         const newElem = document.createElement("option");
         newElem.innerHTML = locationString;
         newElem.className = "location"; 
@@ -222,7 +224,7 @@ function addLocationOptions(currentLocationsSet) {
 //     sortedYears.sort().reverse();
 //     sortedYears.forEach((sortedYear) => {
 //         const newElem = document.createElement("option");
-//         newElem.innerHTML = sortedYear;
+//         newElem.innerHTML = sortedYear;  
 //         yearsList.appendChild(newElem);
 //     });
 // }
@@ -232,12 +234,34 @@ const reset = document.querySelector(".reset").addEventListener("click", () => {
     selectedDataTypes.clear();
     selectedLocations.clear();
     selectedYears.clear();
-    document.querySelector(".url-generated").innerHTML = "";
+    document.querySelector(".url-text").innerHTML = "";
     fillSidebar(locationsSet, selectedLocations);
     fillPoints(locationsSet, selectedLocations);
     initFillLocationsList();
     initFillDataTypes();
     initFillYears();
 });
+
+// three letter site code --> full location string
+function siteCodeToLocationString(siteCode) {
+    let newLocationString = "";
+    locationsSet.forEach((location) => {
+        if (siteCode === location.get("proj")) {
+            newLocationString = location.get("name") + " (" + location.get("proj") + ")";
+        }
+    });
+    return newLocationString;
+}
+
+// full location string --> three letter site code
+function locationStringToSiteCode(locationString) {
+    let newSiteCode = "";
+    locationsSet.forEach((location) => {
+        if (locationString === location.get("name") + " (" + location.get("proj") + ")") {
+            newSiteCode = location.get("proj");
+        }
+    });
+    return newSiteCode;
+}
 
 export { search };

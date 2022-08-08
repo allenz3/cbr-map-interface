@@ -8,62 +8,60 @@
         <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
-        <div class="grid-container">
-            <div class="grid-1">
+        <div class="flex-container">
+            <div class="flex-1">
                 <div class="sidebar">
                     <!-- https://stackoverflow.com/questions/8605516/default-select-option-as-blank -->
                     <!-- https://html.com/attributes/select-multiple/#:~:text=How%20To%20Select%20Multiple%20Items%20In%20HTML%3A%20Easy,one%20option.%20...%203%20Browser%20Support%20for%20multiple -->
-                    <h2>Data Types</h2>
-                    <select class="data-types-list" multiple size="12">
-                    </select>
-
+                    <h2 class="heading">Map Interface for</h2>
+                    <h3>River Conditions Graph & Text Query</h3>
+                    <a href="https://www.cbr.washington.edu/sacramento/data/query_river_graph.html">River Conditions Graph & Text Query</a>
+                    
                     <h2>Locations</h2>
-                    <select class="locations-list" multiple size="12">
+                    <select class="locations-list" multiple size="6">
                     </select>
 
                     <br>
                     <input class="search-filter" type="text" placeholder="search here">
                     
+                    <h2>Data Types</h2>
+                    <select class="data-types-list" multiple size="6">
+                    </select>
+
                     <h2>Year</h2>
                     <select class="years-list" multiple size="6">
                     </select>
                     
-                    <br>
-                    <button class="submit-query">Submit Query</button>
+                    <div class="buttons">
+                        <button class="submit-query">Submit Query</button>
+                        <button class="reset">Reset Query</button>
+                    </div>
+                    
+                    <div class="layers">
+                        <!-- https://www.w3schools.com/tags/tag_select.asp -->
+                        <h2>Base Layers</h2>
+                        <select name="base_layers">
+                            <option value='OSMStandard' checked>OSM Standard</option>
+                            <option value='BingMaps'>Bing Maps</option>
+                            <option value='StamenTerrain'>Stamen Terrain</option>
+                        </select>
 
-                    <br>
-                    <button class="reset">Reset</button>
-
-                    <!-- https://www.w3schools.com/tags/tag_select.asp -->
-                    <h2>Base Layers</h2>
-                    <select name="base_layers">
-                        <option value='OSMStandard' checked>OSM Standard</option>
-                        <option value='OSMHumanitarian'>OSM Humanitarian</option>
-                        <option value='BingMaps'>Bing Maps</option>
-                        <option value='CartoDarkAll'>Carto Dark All</option>
-                        <option value='StamenTerrainWithLabels'>Stamen Terrain With Labels</option>
-                        <option value='StamenTerrain'>Stamen Terrain</option>
-                        <option value='VectorTileLayerOpenStreetMap'>Vector Tile Layer OpenStreetMap</option>
-                    </select>
-
-                    <h2>Additional Layers</h2>
-                    <select name="additional_layers" multiple>
-                        <option value='TileArcGISLayer'>Tile ArcGIS Layer<br>
-                        <option value='TileArcGISLayer2'>Tile ArcGIS Layer 2<br>
-                        <option value='TileArcGISLayer3'>Tile ArcGIS Layer 3<br>
-                        <option value='NOAAWMSLayer'>NOAA WMS Layer<br>
-                        <option value='TileDebugLayer'>Tile Debug Layer<br>
-                        <option value='openStreetMapFragmentStatic'>OpenStreetMap Humanitarian Fragment Static<br>
-                    </select>
-
-                    <h2>URL Generated</h2>
-                    <div class="url-generated">
+                        <h2>Additional Layers</h2>
+                        <select name="additional_layers" multiple size="2">
+                            <option value='StreamsLayer'>Streams Layer<br>
+                            <option value='NOAAWMSLayer'>NOAA WMS Layer<br>
+                        </select>
                     </div>
                 </div>
             </div>
-            <div class="grid-2">
+            <div class="flex-2">
                 <div id='js-map' class='map'>
                     <p id='popup-coordinates'></p>
+                </div>
+
+                <h2>URL Generated</h2>
+                <div class="url-generated">
+                    <p class="url-text"></p>
                 </div>
             </div>
         </div>

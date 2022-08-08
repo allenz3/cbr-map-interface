@@ -5,17 +5,22 @@ import rasterLayerGroup from './raster_layers.js';
 import { dragRotateInteraction, drawInteraction, freehandDraw } from './interactions.js';
 import { popup } from './overlays.js';
 import { initLocations } from './locations.js';
-import { makeInventory } from './data_types.js';
+import { makeDataTypesInventory } from './data_types.js';
 import { search } from './filters.js'
-import makeInventory2 from './url.js';
-// https://youtu.be/cRHQNNcYf6s
+import { makeURLInventory, generateURL } from './url.js';
+// https://youtu.be/cRHQNNcYf6s]
 
-function createMap(long, lat, locationGeoJSON) {
+function createMap(long, lat, locationGeoJSON, dataTypesJSON, URLConstant) {
     
     // set view center
     setCenterPoint(long, lat);
-    makeInventory();
-    makeInventory2();
+
+    // set up data types and URL generation
+    document.querySelector(".submit-query").addEventListener("click", () => {
+        generateURL(URLConstant)
+    });
+    makeDataTypesInventory(dataTypesJSON);
+    makeURLInventory(dataTypesJSON);
 
     // map.on('click', (e) => console.log(e.coordinate));
 
@@ -36,7 +41,7 @@ function createMap(long, lat, locationGeoJSON) {
     // locationGeoJSON.getFeaturesInExtent(freehandDraw);
 }
 
-export default createMap;
+export { createMap };
 
 // https://www.udemy.com/course/openlayers-6-from-scratch-with-a-project/
 // https://openlayers.org/en/latest/apidoc/module-ol_layer_Vector-VectorLayer.html#getSource
