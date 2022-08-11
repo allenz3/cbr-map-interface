@@ -16,11 +16,11 @@ function createMap(long, lat, locationGeoJSON, dataTypesJSON, URLConstant) {
     setCenterPoint(long, lat);
 
     // set up data types and URL generation
+    makeDataTypesInventory(dataTypesJSON);
+    makeURLInventory(dataTypesJSON);
     document.querySelector(".submit-query").addEventListener("click", () => {
         generateURL(URLConstant)
     });
-    makeDataTypesInventory(dataTypesJSON);
-    makeURLInventory(dataTypesJSON);
 
     // map.on('click', (e) => console.log(e.coordinate));
 
@@ -38,6 +38,7 @@ function createMap(long, lat, locationGeoJSON, dataTypesJSON, URLConstant) {
     // create location option selection list
     initLocations(locationGeoJSON);
 
+    // freehand drawing feature (potential selection tool)
     // locationGeoJSON.getFeaturesInExtent(freehandDraw);
 }
 

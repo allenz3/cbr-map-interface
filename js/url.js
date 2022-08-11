@@ -39,26 +39,29 @@ function generateURL(URLConstant) {
     for (let i = 0; i < dataTypesList.length; i++) {
         const option = dataTypesList[i];
         if (option.selected) {
-            const newString = "&data[]=" + nameMap.get(option.innerHTML);
+            const newString = "&data[]=" + nameMap.get(option.innerText);
             URLString += newString;
         }
     }
     for (let i = 0; i < locationsList.length; i++) {
         const option = locationsList[i];
         if (option.selected) {
-            const newString = "&loc[]=" + siteCodeMap.get(option.innerHTML);
+            const newString = "&loc[]=" + siteCodeMap.get(option.innerText);
+            console.log(siteCodeMap)
+            console.log(option.innerText)
             URLString += newString;
         }
     }
     for (let i = 0; i < yearsList.length; i++) {
         const option = yearsList[i];
         if (option.selected) {
-            const newString = "&year[]=" + option.innerHTML;
+            const newString = "&year[]=" + option.innerText;
             URLString += newString;
         }
     }
     urlText.innerHTML = URLString;
     // window.open("https://" + URLConstant, "_blank");
 }
+// https://betterprogramming.pub/whats-best-innertext-vs-innerhtml-vs-textcontent-903ebc43a3fc
 
 export { makeURLInventory, generateURL };

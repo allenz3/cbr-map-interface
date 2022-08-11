@@ -15,11 +15,10 @@ const selectedYears = new Set();
 // search filter by keyword based on user input
 const search = document.querySelector(".search-filter").addEventListener("input", () => {
     const searchInput = document.querySelector(".search-filter").value;
-    const locationsList = document.querySelector(".locations-list");
     const currentLocationsSet = new Set();
     locationsSet.forEach((location) => {
         const locationString = location.get("name") + " (" + location.get("proj") + ")";
-        if ((locationString.toLowerCase()).includes(searchInput.toLowerCase())) currentLocationsSet.add(location);
+        if ((locationString.toLowerCase()).includes(searchInput.toLowerCase())) currentLocationsSet.add(location.get("proj"));
     });
     addLocationOptions(currentLocationsSet);
     fillSidebar(locationsSet, selectedLocations);
