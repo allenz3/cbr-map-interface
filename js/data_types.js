@@ -1,53 +1,48 @@
-/*
-Stored in alphabetical order
-*/
-
 const dataTypesMap = new Map();
 const locationsMap = new Map();
 const yearsMap = new Map();
 let dataTypes = new Array();
 const years = new Set();
 
-// make maps of data types to locations and locations to data types
-async function makeDataTypesInventory(dataTypesJSON) {
+// Note: the maps are constructed in alphabetical order (data types, then locations, then years) but the CBR site uses a different order (locations, then data types, then years)
+async function makeFilterInventories(dataTypesJSON) {
     const response = await fetch(dataTypesJSON);
     const inventory = await response.json();
     inventory["river_data"].forEach((siteData) => {
+        // onlineData checks if the siteData is applicable to the query system
         if (siteData["onlineData"] === "1") {
             const siteCode = siteData["siteCode"];
             const dataTypeName = siteData["onlineNames"];
             const year = siteData["year"];
-            // alphabetical order
+
             if (!dataTypesMap.has(dataTypeName)) {
                 dataTypes.push(dataTypeName);
                 dataTypesMap.set(dataTypeName, new Array(new Set(), new Set()));
             }
+            dataTypesMap.get(dataTypeName)[0].add(siteCode);
+            dataTypesMap.get(dataTypeName)[1].add(year);
+
             if (!locationsMap.has(siteCode)) {
                 locationsMap.set(siteCode, new Array(new Set(), new Set()));
             }
+            locationsMap.get(siteCode)[0].add(dataTypeName);
+            locationsMap.get(siteCode)[1].add(year);
+
             if (!yearsMap.has(year)) {
                 years.add(year);
                 yearsMap.set(year, new Array(new Set(), new Set()));
             }
-            // data type -> location
-            dataTypesMap.get(dataTypeName)[0].add(siteCode);
-            // data type -> year
-            dataTypesMap.get(dataTypeName)[1].add(year);
-            // location -> data type
-            locationsMap.get(siteCode)[0].add(dataTypeName);
-            // location -> year
-            locationsMap.get(siteCode)[1].add(year);
-            // year -> data type
             yearsMap.get(year)[0].add(dataTypeName);
-            // year -> location
             yearsMap.get(year)[1].add(siteCode);
         }
     });
-    initFillDataTypes();
-    initFillYears();
+    fillDataTypesList();
+    fillYearsList();
 }
+// https://youtu.be/uxf0--uiX0I
+// https://www.w3schools.com/js/js_maps.asp
 
-function initFillDataTypes() {
+function fillDataTypesList() {
     const dataTypesList = document.querySelector(".data-types-list");
     dataTypesList.innerHTML = "";
     dataTypes.sort();
@@ -58,19 +53,7 @@ function initFillDataTypes() {
     });
 }
 
-function initFillYears() {
-    // const yearsList = document.querySelector(".years-list");
-    // yearsList.innerHTML = "";
-    // const sortedYears = new Array();
-    // years.forEach((year) => {
-    //     sortedYears.push(year);
-    // })
-    // sortedYears.sort().reverse();
-    // sortedYears.forEach((sortedYear) => {
-    //     const newElem = document.createElement("option");
-    //     newElem.innerHTML = sortedYear;
-    //     yearsList.appendChild(newElem);
-    // });
+function fillYearsList() {
     const yearsList = document.querySelector(".years-list");
     yearsList.innerHTML = "";
     for (let i = 2022; i >= 1945; i--) {
@@ -80,7 +63,4 @@ function initFillYears() {
     }
 }
 
-export { makeDataTypesInventory, initFillDataTypes, initFillYears, dataTypesMap, locationsMap, yearsMap };
-
-// https://youtu.be/uxf0--uiX0I
-// https://www.w3schools.com/js/js_maps.asp
+export { makeFilterInventories, fillDataTypesList, fillYearsList, dataTypesMap, locationsMap, yearsMap };

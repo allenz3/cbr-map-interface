@@ -10,8 +10,7 @@ const drawInteraction = new ol.interaction.Draw({
     freehandCondition: ol.events.condition.shiftKeyOnly
 });
 
-// get features in extent?
-// also hide the blue point on the cursor tip, might want to disable the draw interaction unless the shift key is held down
+// freehand drawing with the mouse cursor
 const freehandDraw = drawInteraction.on('drawend', function(e) {
     let parser = new ol.format.GeoJSON();
     let drawnFeatures = parser.writeFeaturesObject([e.feature]);

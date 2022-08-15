@@ -1,50 +1,32 @@
 import map from './view.js';
-import { setCenterPoint } from './view.js';
+import { setViewCenter } from './view.js';
 import baseLayerGroup from './base_layers.js';
 import rasterLayerGroup from './raster_layers.js';
-import { dragRotateInteraction, drawInteraction, freehandDraw } from './interactions.js';
 import { popup } from './overlays.js';
-import { initLocations } from './locations.js';
-import { makeDataTypesInventory } from './data_types.js';
-import { search } from './filters.js'
-import { makeURLInventory, generateURL } from './url.js';
+import { createLocationsSet } from './locations.js';
+import { makeFilterInventories } from './data_types.js';
+import { makeURLInventories, generateURL } from './url.js';
+// unused import needed for search filter function
+import { searchFilter } from './filters.js';
 // https://youtu.be/cRHQNNcYf6s]
 
-function createMap(long, lat, locationGeoJSON, dataTypesJSON, URLConstant) {
-    
-    // set view center
-    setCenterPoint(long, lat);
+function createMap(long, lat, vectorLayer, dataTypesJSON, URLConstant) {
 
-    // set up data types and URL generation
-    makeDataTypesInventory(dataTypesJSON);
-    makeURLInventory(dataTypesJSON);
-    document.querySelector(".submit-query").addEventListener("click", () => {
-        generateURL(URLConstant)
-    });
+    setViewCenter(long, lat);
 
-    // map.on('click', (e) => console.log(e.coordinate));
+    makeFilterInventories(dataTypesJSON);
+    makeURLInventories(dataTypesJSON);
+    const submitQuery = document.querySelector(".submit-query");
+    submitQuery.addEventListener("click", () => generateURL(URLConstant));
 
-    map.addInteraction(dragRotateInteraction);
-    // map.addInteraction(drawInteraction);
-
-    // Layers
     map.addLayer(baseLayerGroup);
     map.addLayer(rasterLayerGroup);
-    map.addLayer(locationGeoJSON);
-
-    // Overlays
+    map.addLayer(vectorLayer);
     map.addOverlay(popup);
 
-    // create location option selection list
-    initLocations(locationGeoJSON);
-
-    // freehand drawing feature (potential selection tool)
-    // locationGeoJSON.getFeaturesInExtent(freehandDraw);
+    createLocationsSet(vectorLayer);
 }
 
 export { createMap };
 
 // https://www.udemy.com/course/openlayers-6-from-scratch-with-a-project/
-// https://openlayers.org/en/latest/apidoc/module-ol_layer_Vector-VectorLayer.html#getSource
-// https://attacomsian.com/blog/javascript-iterate-objects
-// https://www.freecodecamp.org/news/javascript-settimeout-how-to-set-a-timer-in-javascript-or-sleep-for-n-seconds/

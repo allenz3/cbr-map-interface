@@ -1,4 +1,5 @@
 // Map View Controls
+
 const fullScreenControl = new ol.control.FullScreen();
 const mousePositionControl = new ol.control.MousePosition();
 const overViewMapControl = new ol.control.OverviewMap({
@@ -16,11 +17,8 @@ const attributionControl = new ol.control.Attribution({
     collapsible: true
 });
 
-const controls = ol.control.defaults({attribution: false}).extend([
+const controls = ol.control.defaults({ attribution: false }).extend([
     fullScreenControl,
-    // mousePositionControl,
-    overViewMapControl,
-    scaleLineControl,
     zoomSliderControl,
     zoomToExtentControl,
     attributionControl

@@ -4,10 +4,7 @@ const fillStyle = new ol.style.Fill({
 
 const strokeStyle = new ol.style.Stroke({
     color: [0, 0, 0, 1],
-    width: 2,
-    // lineCap: 'square',
-    // lineJoin: 'bevel',
-    // lineDash: [3, 3]
+    width: 2
 });
 
 const circleStyle = new ol.style.Circle({

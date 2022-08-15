@@ -1,12 +1,11 @@
 import { fillStyle, strokeStyle, circleStyle } from './styles.js';
 
-const locationGeoJSON = new ol.layer.Vector({
+const SacPASVectorLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
         url: './data/json/SacPAS_locations_GeoJSON.geojson',
         format: new ol.format.GeoJSON()
     }),
     visible: true,
-    title: 'locationGeoJSON',
     style: new ol.style.Style({
         fill: fillStyle,
         stroke: strokeStyle,
@@ -14,13 +13,12 @@ const locationGeoJSON = new ol.layer.Vector({
     })
 });
 
-const locationGeoJSON2 = new ol.layer.Vector({
+const DARTVectorLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
         url: './data/json/DART_locations_GeoJSON.geojson',
         format: new ol.format.GeoJSON()
     }),
     visible: true,
-    title: 'locationGeoJSON2',
     style: new ol.style.Style({
         fill: fillStyle,
         stroke: strokeStyle,
@@ -28,4 +26,4 @@ const locationGeoJSON2 = new ol.layer.Vector({
     })
 });
 
-export { locationGeoJSON, locationGeoJSON2 };
+export { SacPASVectorLayer, DARTVectorLayer };

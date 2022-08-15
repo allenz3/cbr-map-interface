@@ -1,135 +1,106 @@
-/* Various filters used to create specific search queries.
+/*
+Various filters used to create specific search queries.
 NOTE: The year filter is disabled for the time being and is currently a static list.
 */
 
 import map from './view.js';
 import { dataTypesMap, locationsMap, yearsMap } from './data_types.js';
-import { locationsSet, initFillLocationsList, initLocations } from './locations.js'
+import { locationsSet, fillLocationsList } from './locations.js'
 import { bluePoint, whitePoint } from './styles.js';
-import { initFillDataTypes, initFillYears } from './data_types.js';
+import { fillDataTypesList, fillYearsList } from './data_types.js';
 
 const selectedDataTypes = new Set();
 const selectedLocations = new Set();
 const selectedYears = new Set();
 
-// search filter by keyword based on user input
-const search = document.querySelector(".search-filter").addEventListener("input", () => {
+const dataTypesList = document.querySelector(".data-types-list");
+const locationsList = document.querySelector(".locations-list");
+const resetQuery = document.querySelector(".reset-query");
+const searchFilter = document.querySelector(".search-filter");
+const yearsList = document.querySelector(".years-list");
+
+const searchKeyword = searchFilter.addEventListener("input", () => {
     const searchInput = document.querySelector(".search-filter").value;
     const currentLocationsSet = new Set();
     locationsSet.forEach((location) => {
         const locationString = location.get("name") + " (" + location.get("proj") + ")";
         if ((locationString.toLowerCase()).includes(searchInput.toLowerCase())) currentLocationsSet.add(location.get("proj"));
     });
+    if (dataTypesList.value) {
+        const initialSiteCodesSet = dataTypesMap.get(dataTypesList.value)[0];
+        const filteredSiteCodesSet = filterMultipleSets(initialSiteCodesSet, selectedDataTypes, dataTypesMap);
+        ANDLogicEnforcement(currentLocationsSet, filteredSiteCodesSet);
+    }
     addLocationOptions(currentLocationsSet);
-    fillSidebar(locationsSet, selectedLocations);
+    fillSidebar(selectedDataTypes, selectedLocations);
 });
 
-// user clicks on a data type, locations and years and filtered
-// Note: only data types are filtered for now
-const dataTypesList = document.querySelector(".data-types-list");
-const filterByDataType = dataTypesList.addEventListener("click", function(e) {
+const dataTypeFilter = dataTypesList.addEventListener("click", function(e) {
     if (e.target.tagName === "OPTION") {
-        // select multiple data types
-        selectMultiple(selectedDataTypes, dataTypesList.value, dataTypesList);
-        // fill locations
-        let filteredSiteCodesSet = new Set();
-        let resetList = true;
+        selectMultipleOptions(selectedDataTypes, dataTypesList.value, dataTypesList);
         if (selectedDataTypes.size === 0) {
-            initFillLocationsList();
-        } else if (selectedDataTypes.size === 1) {
-            filteredSiteCodesSet = new Set(dataTypesMap.get(dataTypesList.value)[0]);
-            addLocationOptions(filteredSiteCodesSet);
+            fillDataTypesList();
+            fillLocationsList();
+            fillSidebar(selectedDataTypes, selectedLocations);
         } else {
-            filteredSiteCodesSet = new Set(dataTypesMap.get(dataTypesList.value)[0]);
-            selectedDataTypes.forEach((dataType) => {
-                const newLocationsSet = new Set(dataTypesMap.get(dataType)[0]);
-                inCommon(filteredSiteCodesSet, newLocationsSet);
-            });
+            const initialSiteCodesSet = dataTypesMap.get(dataTypesList.value)[0];
+            const filteredSiteCodesSet = filterMultipleSets(initialSiteCodesSet, selectedDataTypes, dataTypesMap);
             addLocationOptions(filteredSiteCodesSet);
         }
-        // fill years
-        // const currentYearsSet = dataTypesMap.get(e.target.innerHTML)[1];
-        // inCommon(currentYearsSet, dataTypesMap, selectedDataTypes, 1);
-        // addYearOptions(currentYearsSet);
     }
 });
 
-// user clicks on a location in the sidebar, data types and years are filtered
-// Note: only data types are filtered for now
-const locationsList = document.querySelector(".locations-list")
-const filterByLocation = locationsList.addEventListener('click', (e) => {
-    if (e.target.tagName === "OPTION") {
-        locationSelected(locationsList.value);
-    }
+const locationListFilter = locationsList.addEventListener('click', (e) => {
+    if (e.target.tagName === "OPTION") locationSelected(locationsList.value);
 });
 
-// user clicks on a location point, data types and years are filtered
-// Note: only data types are filtered for now
-const filterByLocationPoint = map.on("singleclick", point => {
+const locationPointsFilter = map.on("singleclick", point => {
     map.forEachFeatureAtPixel(point.pixel, point => {
-        if (point.getGeometry().getType() === 'Point') {
-            locationSelected(point.get("name") + " (" + point.get("proj") + ")");
-        }
+        if (point.getGeometry().getType() === 'Point') locationSelected(point.get("name") + " (" + point.get("proj") + ")");
     });
 });
 
 function locationSelected(locationString) {
     try {
-        // select multiple data types
-        selectMultiple(selectedLocations, locationString, locationsList);
-        // fill data types
-        let filteredDataTypesSet = new Set();
-        let resetList = true;
-        const currentSiteCode = locationStringToSiteCode(locationsList.value);
+        selectMultipleOptions(selectedLocations, locationString, locationsList);
         if (selectedLocations.size === 0) {
-            initFillDataTypes();
-        } else if (selectedLocations.size === 1) {
-            filteredDataTypesSet = new Set(locationsMap.get(currentSiteCode)[0]);
-            addDataTypeOptions(filteredDataTypesSet);
+            fillDataTypesList();
+            fillSidebar(selectedDataTypes, selectedLocations);
         } else {
-            filteredDataTypesSet = new Set(locationsMap.get(currentSiteCode)[0]);
-            selectedLocations.forEach((locationString) => {
-                const newSiteCode = locationStringToSiteCode(locationString);
-                const newDataTypesSet = new Set(locationsMap.get(newSiteCode)[0]);
-                inCommon(filteredDataTypesSet, newDataTypesSet);
-            });
+            const selectedSiteCodes = new Set();
+            selectedLocations.forEach((locationString) => selectedSiteCodes.add(locationStringToSiteCode(locationString)));
+            const currentSiteCode = locationStringToSiteCode(locationsList.value);
+            const initialDataTypesSet = locationsMap.get(currentSiteCode)[0];
+            const filteredDataTypesSet = filterMultipleSets(initialDataTypesSet, selectedSiteCodes, locationsMap);
             addDataTypeOptions(filteredDataTypesSet);
-        }
-        // fill years
-        // const currentYearsSet = locationsMap.get(siteCode)[1];
-        // inCommon(currentYearsSet, locationsMap, selectedLocations, 1);
-        // addYearOptions(currentYearsSet);
-        // update map location points
+        }   
         fillPoints(locationsSet, selectedLocations);
-        // if no options are selected, then reset other filters
     } catch (TypeError) {
-        console.error("There are no relevant data types or years at the current location.");
+        console.error("No data types were found at the current location. Selecting an invalid location will also invalidate all other locations.");
     }
 }
 
-// user clicks on a year, data types and locations are filtered
-const yearsList = document.querySelector(".years-list");
-const filterByYear = yearsList.addEventListener("click", function(e) {
+const yearsFilter = yearsList.addEventListener("click", function(e) {
     if (e.target.tagName === "OPTION") {
-        // select multiple data types
-        selectMultiple(selectedYears, yearsList.value, yearsList);
-        // fill data types
-        // const currentDataTypesSet = yearsMap.get(e.target.innerHTML)[0];
-        // inCommon(currentDataTypesSet, dataTypesMap, selectedDataTypes, 0);
-        // addDataTypeOptions(currentDataTypesSet);
-        // fill locations
-        // const currentSiteCodesSet = yearsMap.get(e.target.innerHTML)[1];
-        // inCommon(currentSiteCodesSet, yearsMap, selectedYears, 1);
-        // const currentLocationsSet = new Set();
-        // locationsSet.forEach((location) => {
-        //     if (currentSiteCodesSet.has(location.get("proj"))) currentLocationsSet.add(location);
-        // }); 
-        // addLocationOptions(currentLocationsSet);
+        selectMultipleOptions(selectedYears, yearsList.value, yearsList);
     }
 });
 
-// allows multiple options to be selected at once
-function selectMultiple(selectedSet, value, list) {
+const reset = resetQuery.addEventListener("click", () => {
+    selectedDataTypes.clear();
+    selectedLocations.clear();
+    selectedYears.clear();
+    document.querySelector(".url-text").innerHTML = "";
+    searchFilter.value = "";
+    fillSidebar(selectedDataTypes, selectedLocations);
+    fillPoints(locationsSet, selectedLocations);
+    fillLocationsList();
+    fillDataTypesList();
+    fillYearsList();
+});
+
+// utility methods
+function selectMultipleOptions(selectedSet, value, list) {
     if (!selectedSet.has(value)) selectedSet.add(value);
     else selectedSet.delete(value);
     for (let i = 0; i < list.length; i++) {
@@ -139,16 +110,30 @@ function selectMultiple(selectedSet, value, list) {
     }
 }
 
-// AND logic enforcement
-function inCommon(currentSet, newSet) {
-    currentSet.forEach((value) => {
-        if (!newSet.has(value)) currentSet.delete(value);
-    })
+function filterMultipleSets(initialSet, selectedSet, selectedMap) {
+    const filteredSet = new Set(initialSet);
+    if (selectedSet.size > 1) {    
+        selectedSet.forEach((elem) => {
+            const newSet = new Set(selectedMap.get(elem)[0]);
+            ANDLogicEnforcement(filteredSet, newSet);
+        });
+    }
+    return filteredSet;
 }
 
-//
-function fillSidebar(locationSet, selectedLocations) {
-    const locationsList = document.querySelector(".locations-list");
+function ANDLogicEnforcement(currentSet, newSet) {
+    currentSet.forEach((value) => {
+        if (!newSet.has(value)) currentSet.delete(value);
+    });
+}
+
+function fillSidebar(selectedDataTypes, selectedLocations) {
+    selectedDataTypes.forEach((dataType) => {
+        for (let i = 0; i < dataTypesList.length; i++) {
+            const dataTypeOption = dataTypesList[i];
+            if (dataType === dataTypeOption.value) dataTypeOption.selected = true;
+        }
+    });
     selectedLocations.forEach((locationString) => {
         for (let i = 0; i < locationsList.length; i++) {
             const locationOption = locationsList[i];
@@ -166,88 +151,53 @@ function fillPoints(locationsSet, selectedLocations) {
 }
 
 function addDataTypeOptions(currentDataTypesSet) {
-    const dataTypes = document.querySelector(".data-types-list");
+    // save currently selected data types
     const currentSelectedDataTypes = new Set();
     if (currentDataTypesSet) {
-        for (let i = 0; i < dataTypes.length; i++) {
-            const option = dataTypes[i];
-            if (option.selected) {
-                currentSelectedDataTypes.add(option.innerHTML);
-            }
+        for (let i = 0; i < dataTypesList.length; i++) {
+            const option = dataTypesList[i];
+            if (option.selected) currentSelectedDataTypes.add(option.innerText);
         }
-        dataTypes.innerHTML = "";
-        currentDataTypesSet.forEach((dataType) => {
+        const currentDataTypesSetSorted = sortAlphabetically(currentDataTypesSet);
+        // add data type options to data types list
+        dataTypesList.innerHTML = "";
+        currentDataTypesSetSorted.forEach((dataType) => {
             const newElem = document.createElement("option");
             newElem.innerHTML = dataType;
             if (currentSelectedDataTypes.has(dataType)) newElem.selected = true;
-            dataTypes.appendChild(newElem);
+            dataTypesList.appendChild(newElem);
         });
     }
 }
 
 function addLocationOptions(currentSiteCodesSet) {
-    // save selected locations
-    const locationsList = document.querySelector(".locations-list");
+    // save currently selected locations
     const currentSelectedLocations = new Set();
     for (let i = 0; i < locationsList.length; i++) {
         const option = locationsList[i];
-        if (option.selected) {
-            currentSelectedLocations.add(option.innerHTML);
-        }
+        if (option.selected) currentSelectedLocations.add(option.innerText);
     }
     const currentLocationsStringSet = new Set();
-    // convert site codes to locations
-    locationsSet.forEach((location) => {
-        if (currentSiteCodesSet.has(location.get("proj"))) {
-            currentLocationsStringSet.add(location.get("name") + " (" + location.get("proj") + ")");
-        }
-    })
-    // fill locations selection box
+    // convert site codes to location strings
+    currentSiteCodesSet.forEach((siteCode) => currentLocationsStringSet.add(siteCodeToLocationString(siteCode)));
+    const currentLocationsStringSetSorted = sortAlphabetically(currentLocationsStringSet);
+    // add location options to locations list
     locationsList.innerHTML = "";
-    currentLocationsStringSet.forEach((locationString) => {
-        const newElem = document.createElement("option");
-        newElem.innerHTML = locationString;
-        newElem.className = "location"; 
-        if (currentSelectedLocations.has(locationString)) newElem.selected = true;
-        locationsList.appendChild(newElem);
+    currentLocationsStringSetSorted.forEach((locationString) => {
+        if (locationString) {
+            const newElem = document.createElement("option");
+            newElem.innerHTML = locationString;
+            if (currentSelectedLocations.has(locationString)) newElem.selected = true;
+            locationsList.appendChild(newElem);
+        }
     });
 }
-
-// function addYearOptions(currentYearsSet) {
-//     const yearsList = document.querySelector(".years-list");
-//     yearsList.innerHTML = "";
-//     const sortedYears = new Array();
-//     currentYearsSet.forEach((year) => {
-//         sortedYears.push(year);
-//     })
-//     sortedYears.sort().reverse();
-//     sortedYears.forEach((sortedYear) => {
-//         const newElem = document.createElement("option");
-//         newElem.innerHTML = sortedYear;  
-//         yearsList.appendChild(newElem);
-//     });
-// }
-
-// reset sidebar and map interface
-const reset = document.querySelector(".reset").addEventListener("click", () => {
-    selectedDataTypes.clear();
-    selectedLocations.clear();
-    selectedYears.clear();
-    document.querySelector(".url-text").innerHTML = "";
-    fillSidebar(locationsSet, selectedLocations);
-    fillPoints(locationsSet, selectedLocations);
-    initFillLocationsList();
-    initFillDataTypes();
-    initFillYears();
-});
 
 // three letter site code --> full location string
 function siteCodeToLocationString(siteCode) {
     let newLocationString = "";
     locationsSet.forEach((location) => {
-        if (siteCode === location.get("proj")) {
-            newLocationString = location.get("name") + " (" + location.get("proj") + ")";
-        }
+        if (siteCode === location.get("proj")) newLocationString = location.get("name") + " (" + location.get("proj") + ")";
     });
     return newLocationString;
 }
@@ -256,11 +206,18 @@ function siteCodeToLocationString(siteCode) {
 function locationStringToSiteCode(locationString) {
     let newSiteCode = "";
     locationsSet.forEach((location) => {
-        if (locationString === location.get("name") + " (" + location.get("proj") + ")") {
-            newSiteCode = location.get("proj");
-        }
+        if (locationString === location.get("name") + " (" + location.get("proj") + ")") newSiteCode = location.get("proj");
     });
     return newSiteCode;
 }
 
-export { search };
+function sortAlphabetically(currentSet) {
+    let array = new Array();
+    currentSet.forEach((elem) => array.push(elem));
+    array.sort((a, b) => (a > b) ? 1 : -1);
+    const newSet = new Set();
+    array.forEach((elem) => newSet.add(elem));
+    return newSet;
+}
+
+export { searchFilter };
