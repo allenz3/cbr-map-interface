@@ -1,9 +1,7 @@
 # CBR Map Interface
-
-Web App Link: https://allenz3.github.io/OpenLayers_Demo/
+Web App Link: https://allenz3.github.io/cbr-map-interface/
 
 This is a map interface I have developed for Columbia Basin Research (CBR), part of the School of Aquatic and Fishery Sciences at the University of Washington. The user can select multiple location, data type, and year filters and create a query that can be viewed on the CBR website with the URL generated. The user can also select between several different base layers and additional layers. This map interface is integrated into several pages on the [CBR Website](https://www.cbr.washington.edu/), such as the [SacPAS](https://www.cbr.washington.edu/sacramento/) web page, and the [DART](https://www.cbr.washington.edu/dart) web page.
-
 # Display
 After selecting between SacPAS or DART on the index page, you will be greeted with this display (SacPAS displayed here): 
 
